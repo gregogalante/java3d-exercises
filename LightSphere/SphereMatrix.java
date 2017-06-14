@@ -32,7 +32,7 @@ public class SphereMatrix extends Group {
     }
     // add spheres as group child
     Transform3D translate = new Transform3D();
-    float t = -((3 * ((float) number / 2.0f) * radius) - (float) radius); // TODO: Rivedere
+    float t = -((3 * ((float) number / 2.0f) * radius) - (float) radius * 1.5f); // TODO: Rivedere
     translate.setTranslation(new Vector3d(t, t, 0));
 
     spheres.setTransform(translate);

@@ -1,10 +1,11 @@
 import javax.media.j3d.Group;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.Appearance;
+import javax.media.j3d.Texture;
+
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.image.TextureLoader;
-import javax.media.j3d.Texture;
 
 class Earth extends Group {
   

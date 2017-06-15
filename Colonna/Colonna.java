@@ -47,14 +47,14 @@ public class Colonna extends Group {
     material.setAmbientColor(239/255f,224/255f,203/255f);
     material.setDiffuseColor(239/255f,224/255f,203/255f);
     appearance.setMaterial(material);
-    // add debug style
-    if (this.debugMode) {
-      appearance.setPolygonAttributes(new PolygonAttributes(
-        PolygonAttributes.POLYGON_LINE,
-        PolygonAttributes.CULL_NONE,
-        0
-      ));
-    }
+    // add style
+    int visible = PolygonAttributes.POLYGON_FILL;
+    if (this.debugMode) { visible = PolygonAttributes.POLYGON_LINE; }
+    appearance.setPolygonAttributes(new PolygonAttributes(
+      visible,
+      PolygonAttributes.CULL_NONE,
+      0
+    ));
     // return the appearance
     return appearance;
   }

@@ -15,7 +15,8 @@ class Main {
     BranchGroup group = new BranchGroup();
 
     // add object to branchgroup
-    group.addChild(new Plane());
+    group.addChild(new Earth(0.5f));
+    group.addChild(new BackSpace());
     universe.getViewingPlatform().setNominalViewingTransform();
     universe.addBranchGraph(group);
 

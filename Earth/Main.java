@@ -52,10 +52,7 @@ class Main {
     BoundingSphere bounds = new BoundingSphere(new Point3d(0.d,0.d,0.d), 10.d);
     // create light
     DirectionalLight light = new DirectionalLight();
-    light.setDirection(0.1f, 0.1f, 0.1f);
-    // add color to light
-    Color3f green = new Color3f(0.0f, 1.0f, 0.0f);
-    light.setColor(green);
+    light.setDirection(0.0f, -0.5f, 0.1f);
     // add bounds to light
     light.setInfluencingBounds(bounds);
     // add light to tg

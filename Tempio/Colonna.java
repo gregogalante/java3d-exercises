@@ -9,6 +9,7 @@ import javax.media.j3d.Transform3D;
 import javax.media.j3d.Material;
 import javax.media.j3d.Texture;
 import javax.media.j3d.TextureAttributes;
+import javax.media.j3d.TexCoordGeneration;
 
 import javax.vecmath.Vector3d;
 
@@ -65,6 +66,9 @@ public class Colonna extends Group {
     TextureAttributes textureAttributes = new TextureAttributes();
 	  textureAttributes.setTextureMode(TextureAttributes.COMBINE);
     appearance.setTextureAttributes(textureAttributes);
+    // initialize and add text coordinates generator
+    TexCoordGeneration tcg = new TexCoordGeneration(TexCoordGeneration.OBJECT_LINEAR, TexCoordGeneration.TEXTURE_COORDINATE_3);
+	  appearance.setTexCoordGeneration(tcg);
     // add style
     int visible = PolygonAttributes.POLYGON_FILL;
     if (this.debugMode) { visible = PolygonAttributes.POLYGON_LINE; }

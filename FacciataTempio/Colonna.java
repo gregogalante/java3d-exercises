@@ -31,14 +31,18 @@ public class Colonna extends Group {
   protected TransformGroup tgAbaco;
 
   public Colonna(float height) {
-    this(height, false);
+    this(height, null, false);
   }
 
-  public Colonna(float height, boolean debugMode) {
+  public Colonna(float height, Appearance appearance) {
+    this(height, appearance, false);
+  }
+
+  public Colonna(float height, Appearance appearance, boolean debugMode) {
     this.debugMode = debugMode;
     // define object values
     this.unit = height / 10;
-    this.colonnaAppearance = createAppearance();
+    this.colonnaAppearance = (appearance == null) ? createAppearance() : appearance;
     this.tgFusto = createFusto();
     this.tgEchino = createEchino();
     this.tgAbaco = createAbaco();
@@ -70,10 +74,8 @@ public class Colonna extends Group {
     TexCoordGeneration tcg = new TexCoordGeneration(TexCoordGeneration.OBJECT_LINEAR, TexCoordGeneration.TEXTURE_COORDINATE_3);
 	  appearance.setTexCoordGeneration(tcg);
     // add style
-    int visible = PolygonAttributes.POLYGON_FILL;
-    if (this.debugMode) { visible = PolygonAttributes.POLYGON_LINE; }
     appearance.setPolygonAttributes(new PolygonAttributes(
-      visible,
+      PolygonAttributes.POLYGON_FILL,
       PolygonAttributes.CULL_NONE,
       0
     ));

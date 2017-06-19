@@ -41,7 +41,7 @@ class Main {
 
   private TransformGroup createTG() {
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new Colonna(2));
+    tg.addChild(new Scalinata(3.0f, 3.0f, 2));
     return tg;
   }
 

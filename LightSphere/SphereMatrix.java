@@ -19,11 +19,11 @@ public class SphereMatrix extends Group {
     if (sphereNumber < 1) {
       throw new RuntimeException("sphereNumber should be one or more");
     }
-    number = sphereNumber;
+    this.number = sphereNumber;
     // initialize appearance
-    appearance = createAppearance();
+    this.appearance = createAppearance();
     // initialize spheres radius
-    radius = createRadius();
+    this.radius = createRadius();
     // create spheres
     for (int y = 0; y < number; y++) {
       for (int x = 0; x < number; x++) {

@@ -23,6 +23,7 @@ public class Facciata extends Group {
   protected float scalinataSize;
 
   protected TransformGroup[] colonne;
+  
   protected Appearance facciataAppearance;
 
   public Facciata() {

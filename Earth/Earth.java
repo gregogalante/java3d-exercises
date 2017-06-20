@@ -27,7 +27,12 @@ class Earth extends Group {
   // This function create a new sphere used as earth.
   protected TransformGroup createSphere() {
     TransformGroup tg = new TransformGroup();
-    Sphere sphere = new Sphere(this.radius, Primitive.GENERATE_NORMALS|Primitive.GENERATE_TEXTURE_COORDS, this.appearance);
+    Sphere sphere = new Sphere(
+      this.radius,
+      Primitive.GENERATE_NORMALS|Primitive.GENERATE_TEXTURE_COORDS,
+      100,
+      this.appearance
+    );
     tg.addChild(sphere);
     return tg;
   }

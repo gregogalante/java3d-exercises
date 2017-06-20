@@ -33,16 +33,27 @@ public class Facciata extends Group {
     this.facciataAppearance = createAppearance();
 
     this.scalinata = createScalinata();
-    addChild(this.scalinata);
+    // addChild(this.scalinata); // TODO: Uncomment
 
     this.tetto = createTetto();
-    addChild(this.tetto);
+    // addChild(this.tetto); // TODO: Uncomment
 
     this.colonne = new TransformGroup[6];
     for (int i = 0; i < 6; i++) {
       this.colonne[i] = createColonna(i);
-      addChild(this.colonne[i]);
+      // addChild(this.colonne[i]); // TODO: Uncomment
     }
+
+    // TODO: Remove me -> test myCopertura
+    TransformGroup tg = new TransformGroup();
+    MyCopertura m = new MyCopertura(
+      1.0f,
+      1.0f,
+      1.0f,
+      this.facciataAppearance
+    );
+    tg.addChild(m);
+    addChild(tg);
   }
 
   protected Appearance createAppearance() {
@@ -67,7 +78,7 @@ public class Facciata extends Group {
 	  appearance.setTexCoordGeneration(tcg);
     // add style
     appearance.setPolygonAttributes(new PolygonAttributes(
-      PolygonAttributes.POLYGON_FILL,
+      PolygonAttributes.POLYGON_LINE, // TODO: Update me
       PolygonAttributes.CULL_NONE,
       0
     ));

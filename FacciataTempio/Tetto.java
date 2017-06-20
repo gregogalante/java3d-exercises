@@ -52,6 +52,8 @@ public class Tetto extends Group {
     addChild(this.base);
     this.sopraBase = createSopraBase();
     addChild(this.sopraBase);
+    this.copertura = createCopertura();
+    addChild(this.copertura);
   }
 
   public float getSize() {
@@ -127,6 +129,12 @@ public class Tetto extends Group {
       0.0f
     ));
     tg.setTransform(translate);
+    return tg;
+  }
+
+  protected TransformGroup createCopertura() {
+    TransformGroup tg = new TransformGroup();
+    // TODO: Continue here
     return tg;
   }
 

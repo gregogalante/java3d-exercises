@@ -31,8 +31,8 @@ class Main {
     TransformGroup vptg = viewingPlatform.getViewPlatformTransform();
     Transform3D lookAtT3D = new Transform3D();
     lookAtT3D.lookAt(
-      new Point3d (0, 3, 10), // observer position
-      new Point3d (0.0, 0.0, 0.0), // center position
+      new Point3d (0, 6, 10), // observer position
+      new Point3d (0.0, 2.0, 0.0), // center position
       new Vector3d(0.0, 1.0, 0.0) // up position
     );
     lookAtT3D.invert();

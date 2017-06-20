@@ -20,7 +20,10 @@ import com.sun.j3d.utils.image.TextureLoader;
 public class Facciata extends Group {
 
   protected TransformGroup scalinata;
-  protected float scalinataSize;
+  protected float scalinataHeight;
+
+  protected TransformGroup tetto;
+  protected float tettoHeight;
 
   protected TransformGroup[] colonne;
   
@@ -28,13 +31,18 @@ public class Facciata extends Group {
 
   public Facciata() {
     this.facciataAppearance = createAppearance();
+
     this.scalinata = createScalinata();
+    addChild(this.scalinata);
+
+    this.tetto = createTetto();
+    addChild(this.tetto);
+
     this.colonne = new TransformGroup[6];
     for (int i = 0; i < 6; i++) {
       this.colonne[i] = createColonna(i);
       addChild(this.colonne[i]);
     }
-    addChild(this.scalinata);
   }
 
   protected Appearance createAppearance() {
@@ -70,8 +78,24 @@ public class Facciata extends Group {
   protected TransformGroup createScalinata() {
     TransformGroup tg = new TransformGroup();
     Scalinata scalinata = new Scalinata(2.75f, 1.0f, 3, this.facciataAppearance);
-    this.scalinataSize = scalinata.getSize();
+    this.scalinataHeight = scalinata.getHeight();
     tg.addChild(scalinata);
+    return tg;
+  }
+
+  protected TransformGroup createTetto() {
+    TransformGroup tg = new TransformGroup();
+    Tetto tetto = new Tetto(2.75f, 1.0f, this.facciataAppearance);
+    this.tettoHeight = tetto.getHeight();
+    tg.addChild(tetto);
+    // add correct transformation to tg
+    Transform3D translate = new Transform3D();
+    translate.setTranslation(new Vector3d(
+      0.0f,
+      (this.scalinataHeight + 2 + this.tettoHeight),
+      0.0f
+    ));
+    tg.setTransform(translate);
     return tg;
   }
 
@@ -79,12 +103,11 @@ public class Facciata extends Group {
     TransformGroup tg = new TransformGroup();
     Colonna colonna = new Colonna(2.0f, this.facciataAppearance);
     tg.addChild(colonna);
-    // add correct transform to tg
     // add correct transformation to tg
     Transform3D translate = new Transform3D();
     translate.setTranslation(new Vector3d(
       ((numColonna > 2) ? -(2.5 - numColonna) : (numColonna - 2.5)),
-      (this.scalinataSize * 3) + 1,
+      (this.scalinataHeight + 1),
       0.0f
     ));
     tg.setTransform(translate);

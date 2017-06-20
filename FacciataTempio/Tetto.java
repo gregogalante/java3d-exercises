@@ -18,7 +18,7 @@ import com.sun.j3d.utils.image.TextureLoader;
 import com.sun.j3d.utils.geometry.Box;
 
 // Scalinata class.
-public class Scalinata extends Group {
+public class Tetto extends Group {
   
   // debug
   protected boolean debugMode;
@@ -27,36 +27,31 @@ public class Scalinata extends Group {
   protected float baseWidth;
   protected float baseLength;
   // elements
-  protected Appearance scalaAppearance;
-  protected TransformGroup[] tgScale;
+  protected Appearance tettoAppearance;
+  protected TransformGroup base;
+  protected TransformGroup sopraBase;
+  protected TransformGroup copertura;
 
-  public Scalinata(float x, float z, int numScale) {
-    this(x, z, numScale, null, false);
+  public Tetto(float x, float z) {
+    this(x, z, null, false);
   }
 
-  public Scalinata(float x, float z, int numScale, Appearance appearance) {
-    this(x, z, numScale, appearance, false);
+  public Tetto(float x, float z, Appearance appearance) {
+    this(x, z, appearance, false);
   }
 
-  public Scalinata(float x, float z, int numScale, Appearance appearance, boolean debugMode) {
+  public Tetto(float x, float z, Appearance appearance, boolean debugMode) {
     this.debugMode = debugMode;
     // set initial values
-    if (numScale < 1) {
-      throw new RuntimeException("numScale should be one or more");
-    }
     this.baseWidth = x;
     this.baseLength = z;
     this.size = calculateSize();
-    this.scalaAppearance = (appearance == null) ? createAppearance() : appearance;
-    this.tgScale = new TransformGroup[numScale];
-    // create scale
-    for (int i = 0; i < this.tgScale.length; i++) {
-      this.tgScale[i] = createScala(i);
-    }
-    // add scale to group
-    for (int i = 0; i < this.tgScale.length; i++) {
-      addChild(this.tgScale[i]);
-    }
+    this.tettoAppearance = (appearance == null) ? createAppearance() : appearance;
+    // create componets
+    this.base = createBase();
+    addChild(this.base);
+    this.sopraBase = createSopraBase();
+    addChild(this.sopraBase);
   }
 
   public float getSize() {
@@ -64,11 +59,7 @@ public class Scalinata extends Group {
   }
 
   public float getHeight() {
-    return (this.size * getScaleNumber());
-  }
-
-  public float getScaleNumber() {
-    return this.tgScale.length;
+    return (this.size * 1.5f);
   }
 
   protected Appearance createAppearance() {
@@ -101,40 +92,42 @@ public class Scalinata extends Group {
     return appearance;
   }
 
-  protected TransformGroup createScala(int numScala) {
-    TransformGroup tg = new TransformGroup();
-    Box scala = new Box(
-      calculateWidth(numScala),
-      this.size,
-      calculateLength(numScala),
-      this.scalaAppearance
-    );
-    tg.addChild(scala);
-    // add correct transformation to tg
-    Transform3D translate = new Transform3D();
-    translate.setTranslation(new Vector3d(
-      0.0f,
-      ((numScala) * this.size * 2),
-      0.0f
-    ));
-    tg.setTransform(translate);
-    return tg;
-  }
-
-  protected float calculateWidth(int numScala) {
-    float width = (this.baseWidth + (this.size * (this.tgScale.length - numScala - 1)));
-    return width;
-  }
-
-  protected float calculateLength(int numScala) {
-    float length = (this.baseLength + (this.size * (this.tgScale.length - numScala - 1)));
-    return length;
-  }
-
   // This function calculate the correct size for a single scalino.
   protected float calculateSize() {
     float d = (float) Math.sqrt((this.baseLength * this.baseLength) + (this.baseWidth * this.baseWidth));
     return (d / 20);
+  }
+
+  protected TransformGroup createBase() {
+    TransformGroup tg = new TransformGroup();
+    Box base = new Box(
+      (this.baseWidth),
+      this.size,
+      (this.baseLength),
+      this.tettoAppearance
+    );
+    tg.addChild(base);
+    return tg;
+  }
+
+  protected TransformGroup createSopraBase() {
+    TransformGroup tg = new TransformGroup();
+    Box base = new Box(
+      (this.baseWidth - (this.size / 2)),
+      (this.size / 2),
+      (this.baseLength - (this.size / 2)),
+      this.tettoAppearance
+    );
+    tg.addChild(base);
+    // add correct transformation to tg
+    Transform3D translate = new Transform3D();
+    translate.setTranslation(new Vector3d(
+      0.0f,
+      this.size + (this.size / 2),
+      0.0f
+    ));
+    tg.setTransform(translate);
+    return tg;
   }
 
 }

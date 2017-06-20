@@ -134,7 +134,20 @@ public class Tetto extends Group {
 
   protected TransformGroup createCopertura() {
     TransformGroup tg = new TransformGroup();
-    // TODO: Continue here
+    MyCopertura copertura = new MyCopertura(
+      this.baseWidth,
+      (this.size * 2),
+      this.baseLength,
+      this.tettoAppearance
+    );
+    Transform3D translate = new Transform3D();
+    translate.setTranslation(new Vector3d(
+      0.0f,
+      (this.size * 1.5) + (this.size / 2),
+      0.0f
+    ));
+    tg.setTransform(translate);
+    tg.addChild(copertura);
     return tg;
   }
 

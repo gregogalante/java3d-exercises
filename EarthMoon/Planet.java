@@ -15,19 +15,26 @@ import com.sun.j3d.utils.image.TextureLoader;
 
 import javax.vecmath.Color3f;
 
-class Earth extends Group {
+class Planet extends Group {
   
   protected float radius;
+  protected float rotation;
+  protected String texture;
+  protected BoundingSphere bound;
   protected Appearance appearance;
-  protected TransformGroup sphere;
-  public Earth(float radius) {
+
+  public Planet(float radius, float rotation, String texture, BoundingSphere bound) {
     this.radius = radius;
+    this.rotation = rotation;
+    this.texture = texture;
+    this.bound = bound;
+    // create appearance
     this.appearance = createAppearance();
-    this.sphere = createSphere();
-    addChild(this.sphere);
+    // create sphere
+    addChild(createSphere());
   }
 
-  // This function creates a new sphere used as earth.
+  // This function creates a new sphere used as planet.
   protected TransformGroup createSphere() {
     TransformGroup tg = new TransformGroup();
     Sphere sphere = new Sphere(
@@ -36,6 +43,17 @@ class Earth extends Group {
       100,
       this.appearance
     );
+    // add sphere to tg
+		tg.addChild(sphere);
+    // add rotation to tg
+    if (this.rotation > 0) {
+      addRotation(tg);
+    }
+    // return tg
+    return tg;
+  }
+
+  protected void addRotation(TransformGroup tg) {
     // create transformation for the sphere rotation
     Transform3D sphereRotation = new Transform3D();
 		sphereRotation.rotY(- Math.PI / 4.0f);
@@ -47,21 +65,17 @@ class Earth extends Group {
       tg,
       sphereRotation,
       0.0f,
-      (float) Math.PI * 2.0f
+      (float) Math.PI * this.rotation
     );
     // create bounding sphere and set to interpolator
-		BoundingSphere sphereBoundingSphere = new BoundingSphere();
-		sphereRotationInterpolator.setSchedulingBounds(sphereBoundingSphere);
+		sphereRotationInterpolator.setSchedulingBounds(this.bound);
     // permit rotation after the creation
 		tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
     // add sphere as tg child
     tg.addChild(sphereRotationInterpolator);
-		tg.addChild(sphere);
-    // return tg
-    return tg;
   }
 
-  // This function creates a new appearance for the earth.
+  // This function creates a new appearance for the planet.
   protected Appearance createAppearance() {
     // initialize the appearance
     Appearance app = new Appearance();
@@ -70,16 +84,19 @@ class Earth extends Group {
     material.setShininess(80.0f);
 	  material.setSpecularColor(new Color3f(0.0f, 0.0f, 0.0f));
     app.setMaterial(material);
-    // load texture file
-    TextureLoader textureLoader = new TextureLoader("../images/earth.jpg", null);
-    // initialize texture object
-    Texture texture = textureLoader.getTexture();
-    // add texture to the appearance
-    app.setTexture(texture);
-    // initialize texture attributes
-    TextureAttributes textureAttributes = new TextureAttributes();
-	  textureAttributes.setTextureMode(TextureAttributes.COMBINE);
-    app.setTextureAttributes(textureAttributes);
+    // add texture
+    if (this.texture != "") {
+      // load texture file
+      TextureLoader textureLoader = new TextureLoader(this.texture, null);
+      // initialize texture object
+      Texture texture = textureLoader.getTexture();
+      // add texture to the appearance
+      app.setTexture(texture);
+      // initialize texture attributes
+      TextureAttributes textureAttributes = new TextureAttributes();
+      textureAttributes.setTextureMode(TextureAttributes.COMBINE);
+      app.setTextureAttributes(textureAttributes);
+    }
     // return the appearance
     return app;
   }

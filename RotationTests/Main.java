@@ -6,6 +6,7 @@ This class is a base main object for projects.
 
 */
 
+import com.sun.j3d.utils.universe.SimpleUniverse;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.Transform3D;
@@ -14,12 +15,15 @@ import javax.media.j3d.AmbientLight;
 import javax.media.j3d.DirectionalLight;
 import javax.media.j3d.ImageComponent2D;
 import javax.media.j3d.Background;
+import javax.media.j3d.Group;
+import javax.media.j3d.Alpha;
+import javax.media.j3d.RotationInterpolator;
 
-import javax.vecmath.Point3d;
-
-import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.behaviors.keyboard.KeyNavigatorBehavior;
 import com.sun.j3d.utils.image.TextureLoader;
+
+import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 
 // import ColorCube as default tg child
 import com.sun.j3d.utils.geometry.ColorCube;
@@ -43,7 +47,7 @@ class Main {
     // addAmbientLight(branchGroup);
 
     // add directional light to branchGroup
-    addDirectionalLight(branchGroup);
+    // addDirectionalLight(branchGroup);
 
     // add a background image to the branchGroup
     addBackground(branchGroup, "../images/stars.jpg");
@@ -59,12 +63,50 @@ class Main {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new Planet(0.5f, 4.0f, "../images/earth.jpg", this.defaultBound));
-    tg.addChild(new Moon(0.1f, 1.0f, 4.0f, 4.0f, this.defaultBound));
+    tg.addChild(new MyColorCube(0.3f)); // <-- NOTE: edit here with other components. ***
     // add tg to bg
     bg.addChild(tg);
     // return bg
     return bg;
+  }
+
+  // MyColorCube class:
+  // *******************************************************************************************
+
+  private class MyColorCube extends Group {
+
+    public MyColorCube(float size) {
+      TransformGroup tg = new TransformGroup();
+      // create transformation for the sphere rotation
+      Transform3D rotation = new Transform3D();
+      rotation.rotY(- Math.PI / 4.0f);
+      // create alpha
+      Alpha alpha = new Alpha(-1, 25000);
+      // create rotation interpolator
+      RotationInterpolator rotationInterpolator = new RotationInterpolator(
+        alpha,
+        tg,
+        rotation,
+        0.0f,
+        (float) Math.PI * 2.0f
+      );
+      // create bounding sphere and set to interpolator
+      BoundingSphere rotationBoundingSphere = new BoundingSphere();
+      rotationInterpolator.setSchedulingBounds(rotationBoundingSphere);
+      // permit rotation after the creation
+      tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+      // add sphere as tg child
+      tg.addChild(rotationInterpolator);
+
+      TransformGroup cubeTg = new TransformGroup();
+      // create a transformation to translate the cube
+      Transform3D translation = new Transform3D();
+	    translation.setTranslation(new Vector3d(3.0, 0.0, 0.0));
+		  cubeTg.setTransform(translation);
+      cubeTg.addChild(new ColorCube(0.3f));
+      tg.addChild(cubeTg);
+      addChild(tg);
+    }
   }
 
   // User movements:

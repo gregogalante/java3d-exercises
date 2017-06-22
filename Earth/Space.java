@@ -10,7 +10,7 @@ import javax.vecmath.Point3d;
 
 class Space extends Group {
 
-  private static String defaultImage = "stars.jpg";
+  private static String defaultImage = "../images/stars.jpg";
 
   public Space() {
     this(1000.0, defaultImage);

@@ -6,17 +6,18 @@ This class is a base main object for projects.
 
 */
 
-import com.sun.j3d.utils.universe.SimpleUniverse;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.Transform3D;
-import javax.vecmath.Point3d;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.AmbientLight;
 import javax.media.j3d.DirectionalLight;
 import javax.media.j3d.ImageComponent2D;
 import javax.media.j3d.Background;
 
+import javax.vecmath.Point3d;
+
+import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.behaviors.keyboard.KeyNavigatorBehavior;
 import com.sun.j3d.utils.image.TextureLoader;
 

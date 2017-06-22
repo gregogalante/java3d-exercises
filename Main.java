@@ -36,16 +36,16 @@ class Main {
     BranchGroup branchGroup = createBranchGroup();
 
     // add key movements to branchGroup
-    addKeyMovementsToBranchGroup(universe, branchGroup);
+    // addKeyMovementsToBranchGroup(universe, branchGroup);
 
     // add ambient light to branchGroup
     // addAmbientLight(branchGroup);
 
     // add directional light to branchGroup
-    addDirectionalLight(branchGroup);
+    // addDirectionalLight(branchGroup);
 
     // add a background image to the branchGroup
-    addBackground(branchGroup, "../images/stars.jpg");
+    // addBackground(branchGroup, "images/stars.jpg");
 
     // add branchgroup to universe
     branchGroup.compile();
@@ -58,7 +58,7 @@ class Main {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new Earth(0.5f)); // <-- NOTE: edit here with other components. ***
+    tg.addChild(new ColorCube(0.3)); // <-- NOTE: edit here with other components. ***
     // add tg to bg
     bg.addChild(tg);
     // return bg

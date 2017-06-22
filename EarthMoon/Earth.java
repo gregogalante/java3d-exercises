@@ -71,7 +71,7 @@ class Earth extends Group {
 	  material.setSpecularColor(new Color3f(0.0f, 0.0f, 0.0f));
     app.setMaterial(material);
     // load texture file
-    TextureLoader textureLoader = new TextureLoader("earth.jpg", null);
+    TextureLoader textureLoader = new TextureLoader("../images/earth.jpg", null);
     // initialize texture object
     Texture texture = textureLoader.getTexture();
     // add texture to the appearance

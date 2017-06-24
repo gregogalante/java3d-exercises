@@ -65,7 +65,21 @@ class Main {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new ColorCube(0.3)); // <-- NOTE: edit here with other components. ***
+    tg.addChild(new ColorCube(0.3f));
+
+    // create a Transform3D object for every axis to apply the transformation
+    Transform3D rotationX = new Transform3D();
+    Transform3D rotationY = new Transform3D();
+    Transform3D rotationZ = new Transform3D();
+    // use the function "rotX", "rotY", "rotZ" to create a rotation
+    rotationX.rotX(Math.PI * 0.1d);
+    rotationY.rotY(Math.PI * 0.1d);
+    rotationY.mul(rotationX);
+    rotationZ.rotZ(Math.PI * 0.1d);
+    rotationZ.mul(rotationY);
+    // apply the Transform3D object to the tg (with the funciton "setTransform(Transform3D t)")
+    tg.setTransform(rotationZ); 
+
     // add tg to bg
     bg.addChild(tg);
     // return bg

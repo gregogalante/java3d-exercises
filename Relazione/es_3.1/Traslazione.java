@@ -65,7 +65,15 @@ class Main {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new ColorCube(0.3)); // <-- NOTE: edit here with other components. ***
+    tg.addChild(new ColorCube(0.3f));
+
+    // create a Transform3D object to apply the transformation
+    Transform3D translate = new Transform3D();
+    // use the function "setTranslation(Vector3d trans)" to create a transaltion
+    translate.setTranslation(new Vector3d(0.1f, 0.1f, 0.1f));
+    // apply the Transform3D object to the tg (with the funciton "setTransform(Transform3D t)")
+    tg.setTransform(translate); 
+
     // add tg to bg
     bg.addChild(tg);
     // return bg

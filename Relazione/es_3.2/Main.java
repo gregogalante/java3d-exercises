@@ -1,6 +1,6 @@
 /*
 
-Main.java VERSION 1.2
+Main.java VERSION 1.1
 
 This class is a base main object for projects.
 
@@ -40,7 +40,7 @@ class Main {
     BranchGroup branchGroup = createBranchGroup();
     
     // translate user position
-    // translateLookAt(universe, 1.0f, 1.0f, 4.0f);
+    // translateTookAt(universe, 1.0f, 1.0f, 4.0f);
 
     // add key movements to branchGroup
     // addKeyMovementsToBranchGroup(universe, branchGroup);
@@ -65,7 +65,7 @@ class Main {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new ColorCube(0.3)); // <-- NOTE: edit here with other components. ***
+    tg.addChild(new ColorCubeCircle(100));
     // add tg to bg
     bg.addChild(tg);
     // return bg
@@ -76,14 +76,10 @@ class Main {
   // *******************************************************************************************
 
   // This function translates the user position on the world.
-  private void translateLookAt(SimpleUniverse universe, float x, float y, float z) {
-    // find viewing platform
+  private void translateTookAt(SimpleUniverse universe, float x, float y, float z) {
     ViewingPlatform viewingPlatform = universe.getViewingPlatform();
-    // find view
     View view = universe.getViewer().getView();
-    // find transformgroup for view
     TransformGroup vptg = viewingPlatform.getViewPlatformTransform();
-    // create lookat transormation
     Transform3D lookAtT3D = new Transform3D();
     lookAtT3D.lookAt(
       new Point3d (x, y, z),
@@ -91,7 +87,6 @@ class Main {
       new Vector3d(0.0, 1.0, 0.0)
     );
     lookAtT3D.invert();
-    // set lookat transformation to tg
     vptg.setTransform(lookAtT3D);
   }
 

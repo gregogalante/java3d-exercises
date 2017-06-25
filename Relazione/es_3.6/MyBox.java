@@ -9,8 +9,9 @@ import javax.media.j3d.ColoringAttributes;
 import javax.vecmath.Point3d;
 
 public class MyBox extends Shape3D {
-
-  protected Point3d [] p = new Point3d[17];
+  
+  protected Point3d [] points = new Point3d[8];
+  protected Point3d [] vectors = new Point3d[14];
   protected TriangleStripArray triangleStrip = null;
 
   public MyBox(float topWidth, float topLength, float bottomWidth, float bottomLength, float height, Appearance appearance) {
@@ -18,27 +19,24 @@ public class MyBox extends Shape3D {
       appearance = createAppearance();
     }
     // define points
-    p[0] = new Point3d(-(bottomWidth / 2), -(height / 2), +(bottomLength / 2));
-    p[1] = new Point3d(+(bottomWidth / 2), -(height / 2), +(bottomLength / 2));
-    p[2] = new Point3d(-(bottomWidth / 2), -(height / 2), -(bottomLength / 2));
-    p[3] = new Point3d(+(bottomWidth / 2), -(height / 2), -(bottomLength / 2));
-    p[4] = new Point3d(-(topWidth / 2), +(height / 2), -(topLength / 2));
-    p[5] = new Point3d(+(topWidth / 2), +(height / 2), -(topLength / 2));
-    p[6] = new Point3d(-(topWidth / 2), +(height / 2), +(topLength / 2));
-    p[7] = new Point3d(+(topWidth / 2), +(height / 2), +(topLength / 2));
-    p[8] = p[0];
-    p[9] = p[1];
-    p[10] = p[3];
-    p[11] = p[7];
-    p[12] = p[5];
-    p[13] = p[6];
-    p[14] = p[4];
-    p[15] = p[0];
-    p[16] = p[2];
+    points[0] = new Point3d(-(bottomWidth / 2), +(height / 2), +(bottomLength / 2));
+    points[1] = new Point3d(+(bottomWidth / 2), +(height / 2), +(bottomLength / 2));
+    points[2] = new Point3d(-(bottomWidth / 2), -(height / 2), +(bottomLength / 2));
+    points[3] = new Point3d(+(bottomWidth / 2), -(height / 2), +(bottomLength / 2));
+    points[4] = new Point3d(+(topWidth / 2), +(height / 2), -(topLength / 2));
+    points[5] = new Point3d(-(topWidth / 2), +(height / 2), -(topLength / 2));
+    points[6] = new Point3d(+(topWidth / 2), -(height / 2), -(topLength / 2));
+    points[7] = new Point3d(-(topWidth / 2), -(height / 2), -(topLength / 2));
+    // define vectors
+    vectors[0] = points[1]; vectors[1] = points[0]; vectors[2] = points[2];
+    vectors[3] = points[5]; vectors[4] = points[7]; vectors[5] = points[6];
+    vectors[6] = points[2]; vectors[7] = points[3]; vectors[8] = points[1];
+    vectors[9] = points[6]; vectors[10] = points[4]; vectors[11] = points[5];
+    vectors[12] = points[1]; vectors[13] = points[0];
     // set geometry
-    int [] stripCounts = {(p.length)};
-		triangleStrip = new TriangleStripArray(p.length, GeometryArray.COORDINATES, stripCounts);
-		triangleStrip.setCoordinates(0, p);
+    int [] stripCounts = {(vectors.length)};
+		triangleStrip = new TriangleStripArray(vectors.length, GeometryArray.COORDINATES, stripCounts);
+		triangleStrip.setCoordinates(0, vectors);
 		setGeometry(triangleStrip);
     // manage appearance
     setAppearance(appearance);

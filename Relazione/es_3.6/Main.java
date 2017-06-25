@@ -65,7 +65,7 @@ class Main {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new MyBox(1.0f, 1.0f, 1.0f, null)); // <-- NOTE: edit here with other components. ***
+    tg.addChild(new MyBox(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, null)); // <-- NOTE: edit here with other components. ***
     // add tg to bg
     bg.addChild(tg);
     // return bg

@@ -10,8 +10,7 @@ import javax.vecmath.Point3d;
 
 public class MyBox extends Shape3D {
 
-  protected Point3d [] p = new Point3d[8];
-  protected Point3d [] v = new Point3d[12];
+  protected Point3d [] p = new Point3d[17];
   protected TriangleStripArray triangleStrip = null;
 
   public MyBox(float topWidth, float topLength, float bottomWidth, float bottomLength, float height, Appearance appearance) {
@@ -23,25 +22,24 @@ public class MyBox extends Shape3D {
     p[1] = new Point3d(+(bottomWidth / 2), -(height / 2), +(bottomLength / 2));
     p[2] = new Point3d(-(bottomWidth / 2), -(height / 2), -(bottomLength / 2));
     p[3] = new Point3d(+(bottomWidth / 2), -(height / 2), -(bottomLength / 2));
-    p[4] = new Point3d(-(topWidth / 2), -(height / 2), +(topLength / 2));
-    p[5] = new Point3d(+(topWidth / 2), -(height / 2), +(topLength / 2));
-    p[6] = new Point3d(-(topWidth / 2), -(height / 2), -(topLength / 2));
-    p[7] = new Point3d(+(topWidth / 2), -(height / 2), -(topLength / 2));
-    // define vectors
-    v[0] = p[0]; v[1] = p[1]; v[2] = p[2];
-    v[3] = p[1]; v[4] = p[2]; v[5] = p[3];
-    v[6] = p[4]; v[7] = p[5]; v[8] = p[6];
-    v[9] = p[5]; v[10] = p[6]; v[11] = p[7];
-    // v[12] = p3; v[13] = p6; v[14] = p4;
-    // v[15] = p3; v[16] = p5; v[17] = p6;
-    // v[18] = p1; v[19] = p5; v[20] = p3;
-    // v[21] = p2; v[22] = p4; v[23] = p6;
-    // v[24] = p2; v[25] = p4; v[26] = p6;
-    // v[27] = p2; v[28] = p4; v[29] = p6;
-    // v[30] = p2; v[31] = p4; v[32] = p6;
-    // v[33] = p2; v[34] = p4; v[35] = p6;
+    p[4] = new Point3d(-(topWidth / 2), +(height / 2), -(topLength / 2));
+    p[5] = new Point3d(+(topWidth / 2), +(height / 2), -(topLength / 2));
+    p[6] = new Point3d(-(topWidth / 2), +(height / 2), +(topLength / 2));
+    p[7] = new Point3d(+(topWidth / 2), +(height / 2), +(topLength / 2));
+    p[8] = p[0];
+    p[9] = p[1];
+    p[10] = p[3];
+    p[11] = p[7];
+    p[12] = p[5];
+    p[13] = p[6];
+    p[14] = p[4];
+    p[15] = p[0];
+    p[16] = p[2];
     // set geometry
-
+    int [] stripCounts = {(p.length)};
+		triangleStrip = new TriangleStripArray(p.length, GeometryArray.COORDINATES, stripCounts);
+		triangleStrip.setCoordinates(0, p);
+		setGeometry(triangleStrip);
     // manage appearance
     setAppearance(appearance);
   }
@@ -51,7 +49,7 @@ public class MyBox extends Shape3D {
     Appearance app = new Appearance();
     // set polygon attributes
     PolygonAttributes polyAttrbutes = new PolygonAttributes();
-    polyAttrbutes.setPolygonMode(PolygonAttributes.POLYGON_LINE);
+    polyAttrbutes.setPolygonMode(PolygonAttributes.POLYGON_FILL);
 		polyAttrbutes.setCullFace(PolygonAttributes.CULL_NONE);
     app.setPolygonAttributes(polyAttrbutes);
     // set coloring attributes

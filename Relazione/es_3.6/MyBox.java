@@ -19,14 +19,14 @@ public class MyBox extends Shape3D {
       appearance = createAppearance();
     }
     // define points
-    points[0] = new Point3d(-(bottomWidth / 2), +(height / 2), +(bottomLength / 2));
-    points[1] = new Point3d(+(bottomWidth / 2), +(height / 2), +(bottomLength / 2));
+    points[0] = new Point3d(-(topWidth / 2), +(height / 2), +(topLength / 2));
+    points[1] = new Point3d(+(topWidth / 2), +(height / 2), +(topLength / 2));
     points[2] = new Point3d(-(bottomWidth / 2), -(height / 2), +(bottomLength / 2));
     points[3] = new Point3d(+(bottomWidth / 2), -(height / 2), +(bottomLength / 2));
     points[4] = new Point3d(+(topWidth / 2), +(height / 2), -(topLength / 2));
     points[5] = new Point3d(-(topWidth / 2), +(height / 2), -(topLength / 2));
-    points[6] = new Point3d(+(topWidth / 2), -(height / 2), -(topLength / 2));
-    points[7] = new Point3d(-(topWidth / 2), -(height / 2), -(topLength / 2));
+    points[6] = new Point3d(+(bottomWidth / 2), -(height / 2), -(bottomLength / 2));
+    points[7] = new Point3d(-(bottomWidth / 2), -(height / 2), -(bottomLength / 2));
     // define vectors
     vectors[0] = points[1]; vectors[1] = points[0]; vectors[2] = points[2];
     vectors[3] = points[5]; vectors[4] = points[7]; vectors[5] = points[6];

@@ -40,7 +40,7 @@ class Main {
     BranchGroup branchGroup = createBranchGroup();
     
     // translate user position
-    // translateLookAt(universe, 1.0f, 1.0f, 4.0f);
+    translateLookAt(universe, 0.0f, 0.0f, 15.0f);
 
     // add key movements to branchGroup
     addKeyMovementsToBranchGroup(universe, branchGroup);
@@ -49,7 +49,7 @@ class Main {
     // addAmbientLight(branchGroup);
 
     // add directional light to branchGroup
-    // addDirectionalLight(branchGroup);
+    addDirectionalLight(branchGroup);
 
     // add a background image to the branchGroup
     addBackground(branchGroup, "../../images/stars.jpg");
@@ -65,7 +65,7 @@ class Main {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new MyBox(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, null)); // <-- NOTE: edit here with other components. ***
+    tg.addChild(new MayaPyramid(4.0f));
     // add tg to bg
     bg.addChild(tg);
     // return bg

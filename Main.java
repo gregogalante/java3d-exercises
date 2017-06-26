@@ -53,6 +53,9 @@ class Main {
     // add directional light to branchGroup
     // addDirectionalLight(branchGroup);
 
+    // add spot light to branchGroup
+    // addSpotLight(branchGroup);
+
     // add a background image to the branchGroup
     // addBackground(branchGroup, "images/stars.jpg");
 

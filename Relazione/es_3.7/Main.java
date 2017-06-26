@@ -1,6 +1,6 @@
 /*
 
-Main.java VERSION 1.3
+Main.java VERSION 1.2
 
 This class is a base main object for projects.
 
@@ -19,6 +19,7 @@ import javax.media.j3d.SpotLight;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
+import javax.vecmath.Point3f;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.universe.ViewingPlatform;
@@ -30,7 +31,7 @@ import com.sun.j3d.utils.geometry.ColorCube;
 
 class Main {
 
-  private BoundingSphere defaultBound = new BoundingSphere(new Point3d(), 10.0d);
+  private BoundingSphere defaultBound = new BoundingSphere(new Point3d(), 100.0d);
 
   public Main() {
     // initialize a new simple universe
@@ -41,16 +42,19 @@ class Main {
     BranchGroup branchGroup = createBranchGroup();
     
     // translate user position
-    // translateLookAt(universe, 1.0f, 1.0f, 4.0f);
+    translateLookAt(universe, 0.0f, 0.0f, 5.0f);
 
     // add key movements to branchGroup
-    // addKeyMovementsToBranchGroup(universe, branchGroup);
+    addKeyMovementsToBranchGroup(universe, branchGroup);
 
     // add ambient light to branchGroup
     // addAmbientLight(branchGroup);
 
     // add directional light to branchGroup
     // addDirectionalLight(branchGroup);
+
+    // add spot light to branchGroup
+    addSpotLight(branchGroup);
 
     // add a background image to the branchGroup
     // addBackground(branchGroup, "images/stars.jpg");
@@ -66,7 +70,7 @@ class Main {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new ColorCube(0.3)); // <-- NOTE: edit here with other components. ***
+    tg.addChild(new SphereMatrix(5)); // <-- NOTE: edit here with other components. ***
     // add tg to bg
     bg.addChild(tg);
     // return bg
@@ -126,7 +130,7 @@ class Main {
 
   // This function add a directional light to the world with the default direction.
   private void addDirectionalLight(BranchGroup branchGroup) {
-    addDirectionalLight(branchGroup, 0.0f, 0.0f, 0.0f);
+    addDirectionalLight(branchGroup, -1.0f, -0.5f, 1.0f);
   }
 
   // This function add a directional light to the world with a custom direction.
@@ -142,7 +146,7 @@ class Main {
 
   // This function add a spot light with default position and angle.
   private void addSpotLight(BranchGroup branchGroup) {
-    addSpotLight(branchGroup, 0.0f, 0.0f, 1.0f, (float) Math.PI / 2.0f);
+    addSpotLight(branchGroup, 0.0f, 0.0f, 1.0f, (float)Math.PI/6.0f);
   }
 
   // This function add a spot light to the world with custom position and angle.

@@ -11,7 +11,6 @@ import javax.media.j3d.PolygonAttributes;
 import com.sun.j3d.utils.image.TextureLoader;
 
 import javax.vecmath.Vector3d;
-import javax.vecmath.Color3f;
 
 public class MayaPyramid extends Group {
 
@@ -32,7 +31,7 @@ public class MayaPyramid extends Group {
 
   protected TransformGroup createLevel(int counter) {
     TransformGroup tg = new TransformGroup();
-    // create box
+    // create box (change size for the last box)
     float bottomWidth = (counter == 9) ? ((15 - counter - 2) * this.unit) : ((15 - counter) * this.unit);
     float topWidth = (counter == 9) ? bottomWidth : (bottomWidth - (this.unit / 2));
     float height = (counter == 9) ? (this.unit * 2) : this.unit;
@@ -50,8 +49,6 @@ public class MayaPyramid extends Group {
     Appearance appearance = new Appearance();
     // add material
     Material material = new Material();
-    material.setShininess(80.0f);
-	  material.setSpecularColor(new Color3f(0.0f, 0.0f, 0.0f));
     appearance.setMaterial(material);
     // load texture file
     TextureLoader textureLoader = new TextureLoader("../../images/pietra.jpg", null);

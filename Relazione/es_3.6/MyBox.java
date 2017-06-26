@@ -6,6 +6,9 @@ import javax.media.j3d.TriangleStripArray;
 import javax.media.j3d.GeometryArray;
 import javax.media.j3d.ColoringAttributes;
 
+import com.sun.j3d.utils.geometry.NormalGenerator;
+import com.sun.j3d.utils.geometry.GeometryInfo;
+
 import javax.vecmath.Point3d;
 
 public class MyBox extends Shape3D {
@@ -14,7 +17,8 @@ public class MyBox extends Shape3D {
   protected Point3d [] vectors = new Point3d[14];
   protected TriangleStripArray triangleStrip = null;
 
-  public MyBox(float topWidth, float topLength, float bottomWidth, float bottomLength, float height, Appearance appearance) {
+  public MyBox(float topWidth, float topLength, float bottomWidth, float bottomLength,
+               float height, Appearance appearance) {
     if (appearance == null) {
       appearance = createAppearance();
     }
@@ -38,6 +42,11 @@ public class MyBox extends Shape3D {
 		triangleStrip = new TriangleStripArray(vectors.length, GeometryArray.COORDINATES, stripCounts);
 		triangleStrip.setCoordinates(0, vectors);
 		setGeometry(triangleStrip);
+    // set geometry info
+    GeometryInfo gInfo = new GeometryInfo(triangleStrip);
+    NormalGenerator normgen = new NormalGenerator();
+    normgen.generateNormals(gInfo);
+    setGeometry(gInfo.getGeometryArray());
     // manage appearance
     setAppearance(appearance);
   }

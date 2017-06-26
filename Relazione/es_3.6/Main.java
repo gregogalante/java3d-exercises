@@ -52,7 +52,7 @@ class Main {
     addDirectionalLight(branchGroup);
 
     // add a background image to the branchGroup
-    addBackground(branchGroup, "../../images/stars.jpg");
+    addBackground(branchGroup, "../../images/forest.jpg");
 
     // add branchgroup to universe
     branchGroup.compile();
@@ -66,6 +66,10 @@ class Main {
     // create main tg
     TransformGroup tg = new TransformGroup();
     tg.addChild(new MayaPyramid(4.0f));
+    // translate pyramid
+    Transform3D translate = new Transform3D();
+    translate.setTranslation(new Vector3d(0.0f, -0.5f, 0.0f));
+    tg.setTransform(translate);
     // add tg to bg
     bg.addChild(tg);
     // return bg

@@ -130,7 +130,7 @@ class Main {
 
   // This function add a directional light to the world with the default direction.
   private void addDirectionalLight(BranchGroup branchGroup) {
-    addDirectionalLight(branchGroup, 0.0f, 0.0f, 0.0f);
+    addDirectionalLight(branchGroup, 1.0f, 1.0f, 1.0f);
   }
 
   // This function add a directional light to the world with a custom direction.

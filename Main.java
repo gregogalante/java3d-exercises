@@ -25,6 +25,7 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.universe.ViewingPlatform;
 import com.sun.j3d.utils.behaviors.keyboard.KeyNavigatorBehavior;
 import com.sun.j3d.utils.image.TextureLoader;
+import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 
 // import ColorCube as default tg child
 import com.sun.j3d.utils.geometry.ColorCube;
@@ -45,7 +46,7 @@ class Main {
     // translateLookAt(universe, 1.0f, 1.0f, 4.0f);
 
     // add key movements to branchGroup
-    // addKeyMovementsToBranchGroup(universe, branchGroup);
+    addKeyMovementsToBranchGroup(universe, branchGroup);
 
     // add ambient light to branchGroup
     // addAmbientLight(branchGroup);
@@ -100,7 +101,7 @@ class Main {
     vptg.setTransform(lookAtT3D);
   }
 
-  // This function adds the possibility to user to move the viewer inside the world.
+  // This function adds the possibility to user to move the viewer with keys inside the world.
   private void addKeyMovementsToBranchGroup(SimpleUniverse universe, BranchGroup branchGroup) {
     // find view platform transformgroup
     TransformGroup viewTg = universe.getViewingPlatform().getViewPlatformTransform();

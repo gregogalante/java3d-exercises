@@ -93,6 +93,7 @@ public class Tetto extends Group {
       (this.baseWidth),
       this.size,
       (this.baseLength),
+      Primitive.GENERATE_NORMALS|Primitive.GENERATE_TEXTURE_COORDS,
       this.tettoAppearance
     );
     tg.addChild(base);
@@ -105,6 +106,7 @@ public class Tetto extends Group {
       (this.baseWidth - (this.size / 2)),
       (this.size / 2),
       (this.baseLength - (this.size / 2)),
+      Primitive.GENERATE_NORMALS|Primitive.GENERATE_TEXTURE_COORDS,
       this.tettoAppearance
     );
     tg.addChild(base);

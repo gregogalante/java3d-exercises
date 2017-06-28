@@ -10,7 +10,7 @@ import com.sun.j3d.utils.geometry.NormalGenerator;
 
 public class MyCopertura extends Shape3D {
 
-  protected Point3f v[] = new Point3f[24];
+  protected Point3f v[] = new Point3f[10];
   protected TriangleStripArray triangleStrip = null;
   protected PolygonAttributes polyAttrbutes = new PolygonAttributes();
 
@@ -20,13 +20,13 @@ public class MyCopertura extends Shape3D {
   public MyCopertura(float width, float height, float length, Appearance appearance) {
 
     p1 = new Point3f(
-      -(width),
       0.0f,
+      (height * 2),
       (length)
     );
     p2 = new Point3f(
-      -(width),
       0.0f,
+      (height * 2),
       -(length)
     );
     p3 = new Point3f(
@@ -40,28 +40,25 @@ public class MyCopertura extends Shape3D {
       -(length)
     );
     p5 = new Point3f(
+      -(width),
       0.0f,
-      (height * 2),
       (length)
     );
     p6 = new Point3f(
+      -(width),
       0.0f,
-      (height * 2),
       -(length)
     );
+    
 
-    v[0] = p1; v[1] = p2; v[2] = p4;
-    v[3] = p1; v[4] = p3; v[5] = p4;
-    v[6] = p1; v[7] = p2; v[8] = p6;
-    v[9] = p1; v[10] = p5; v[11] = p6;
-    v[12] = p3; v[13] = p6; v[14] = p4;
-    v[15] = p3; v[16] = p5; v[17] = p6;
-    v[18] = p1; v[19] = p5; v[20] = p3;
-    v[21] = p2; v[22] = p4; v[23] = p6;
+    v[0] = p6; v[1] = p2; v[2] = p5;
+    v[3] = p1; v[4] = p3; v[5] = p2;
+    v[6] = p4; v[7] = p6; v[8] = p3;
+    v[9] = p5;
 
-    int [] stripCounts = {50};
+    int [] stripCounts = {22};
     triangleStrip = new TriangleStripArray(
-      50,
+      22,
       GeometryArray.COORDINATES,
       stripCounts
     );

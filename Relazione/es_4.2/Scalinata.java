@@ -43,7 +43,7 @@ public class Scalinata extends Group {
     this.size = calculateSize();
     this.scalaAppearance = (appearance == null) ? createAppearance() : appearance;
     // create scale
-    for (int i = 0; i < this.tgScale.length; i++) {
+    for (int i = 0; i < this.numScale; i++) {
       addChild(createScala(i));
     }
   }
@@ -96,6 +96,7 @@ public class Scalinata extends Group {
       calculateWidth(numScala),
       this.size,
       calculateLength(numScala),
+      Primitive.GENERATE_NORMALS|Primitive.GENERATE_TEXTURE_COORDS,
       this.scalaAppearance
     );
     tg.addChild(scala);

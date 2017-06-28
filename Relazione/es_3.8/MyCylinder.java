@@ -27,17 +27,17 @@ public class MyCylinder extends Shape3D {
   // MyCylinder constructor 3.
   public MyCylinder(int steps, float topRadius, float bottomRadius, float height, Appearance appearance) {
     float top = height / 2;
-    float bottom = -height / 2;
+    float bottom = - height / 2;
     // create vectors
     v = new Point3f[(steps + 1) * 2];
     for(int i = 0; i < steps; i++) {
       double angle = 2.0 * Math.PI * (double) i / (double) steps;
       float xInf = (float) Math.sin(angle) * bottomRadius;
-      float yInf = (float) Math.cos(angle) * bottomRadius;
+      float zInf = (float) Math.cos(angle) * bottomRadius;
       float xSup = (float) Math.sin(angle) * topRadius;
-      float ySup = (float) Math.cos(angle) * topRadius;
-      v[i*2+0] = new Point3f(xInf, bottom, yInf);
-      v[i*2+1] = new Point3f(xSup, top, ySup);
+      float zSup = (float) Math.cos(angle) * topRadius;
+      v[i*2+0] = new Point3f(xInf, bottom, zInf);
+      v[i*2+1] = new Point3f(xSup, top, zSup);
     }
     v[steps*2+0] = new Point3f(0.0f, bottom, bottomRadius);
     v[steps*2+1] = new Point3f(0.0f, top, topRadius);

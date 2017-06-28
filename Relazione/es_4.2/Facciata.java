@@ -47,11 +47,14 @@ public class Facciata extends Group {
     TextureLoader textureLoader = new TextureLoader("../../images/pietra.jpg", null);
     // initialize texture object
     Texture texture = textureLoader.getTexture();
+    texture.setBoundaryModeS(Texture.WRAP);
+		texture.setBoundaryModeT(Texture.WRAP);
     // add texture to the appearance
     appearance.setTexture(texture);
     // initialize texture attributes
     TextureAttributes textureAttributes = new TextureAttributes();
 	  textureAttributes.setTextureMode(TextureAttributes.COMBINE);
+    textureAttributes.setPerspectiveCorrectionMode(TextureAttributes.NICEST);
     appearance.setTextureAttributes(textureAttributes);
     // initialize and add text coordinates generator
     TexCoordGeneration tcg = new TexCoordGeneration(TexCoordGeneration.OBJECT_LINEAR, TexCoordGeneration.TEXTURE_COORDINATE_3);
@@ -76,7 +79,7 @@ public class Facciata extends Group {
 
   protected TransformGroup createTetto() {
     TransformGroup tg = new TransformGroup();
-    Tetto tetto = new Tetto(2.75f, 1.0f, this.facciataAppearance);
+    Tetto tetto = new Tetto(3.0f, 1.0f, this.facciataAppearance);
     this.tettoHeight = tetto.getHeight();
     tg.addChild(tetto);
     // add correct transformation to tg

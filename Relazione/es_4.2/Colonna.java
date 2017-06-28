@@ -94,7 +94,7 @@ public class Colonna extends Group {
       (this.unit * 1.55f),
       (this.unit * 0.5f),
       (this.unit * 1.55f),
-      Primitive.GENERATE_NORMALS|Primitive.GENERATE_TEXTURE_COORDS,
+      -Primitive.GENERATE_NORMALS|Primitive.GENERATE_TEXTURE_COORDS,
       this.colonnaAppearance
     );
     // translate position

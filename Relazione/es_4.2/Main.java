@@ -42,7 +42,7 @@ class Main {
     BranchGroup branchGroup = createBranchGroup();
     
     // translate user position
-    translateLookAt(universe, 0.0f, 3.0f, 8.0f);
+    translateLookAt(universe, 0.0f, 0.0f, 8.0f);
 
     // add key movements to branchGroup
     addKeyMovementsToBranchGroup(universe, branchGroup);

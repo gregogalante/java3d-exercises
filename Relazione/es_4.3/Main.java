@@ -25,6 +25,7 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.universe.ViewingPlatform;
 import com.sun.j3d.utils.behaviors.keyboard.KeyNavigatorBehavior;
 import com.sun.j3d.utils.image.TextureLoader;
+import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 
 // import ColorCube as default tg child
 import com.sun.j3d.utils.geometry.ColorCube;
@@ -42,7 +43,7 @@ class Main {
     BranchGroup branchGroup = createBranchGroup();
     
     // translate user position
-    translateLookAt(universe, 0.0f, 1.0f, 8.0f);
+    // translateLookAt(universe, 1.0f, 1.0f, 4.0f);
 
     // add key movements to branchGroup
     addKeyMovementsToBranchGroup(universe, branchGroup);
@@ -57,7 +58,7 @@ class Main {
     // addSpotLight(branchGroup);
 
     // add a background image to the branchGroup
-    addBackground(branchGroup, "../../images/terrain.jpg");
+    addBackground(branchGroup, "../../images/stars.jpg");
 
     // add branchgroup to universe
     branchGroup.compile();
@@ -70,7 +71,8 @@ class Main {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new Facciata()); // <-- NOTE: edit here with other components. ***
+    tg.addChild(new Planet(0.5f, 4.0f, "../../images/earth.jpg", this.defaultBound));
+    tg.addChild(new Moon(0.1f, 1.0f, 4.0f, 4.0f, this.defaultBound));
     // add tg to bg
     bg.addChild(tg);
     // return bg
@@ -92,7 +94,7 @@ class Main {
     Transform3D lookAtT3D = new Transform3D();
     lookAtT3D.lookAt(
       new Point3d (x, y, z),
-      new Point3d (0.0, 1.0, 0.0),
+      new Point3d (0.0, 0.0, 0.0),
       new Vector3d(0.0, 1.0, 0.0)
     );
     lookAtT3D.invert();
@@ -100,7 +102,7 @@ class Main {
     vptg.setTransform(lookAtT3D);
   }
 
-  // This function adds the possibility to user to move the viewer inside the world.
+  // This function adds the possibility to user to move the viewer with keys inside the world.
   private void addKeyMovementsToBranchGroup(SimpleUniverse universe, BranchGroup branchGroup) {
     // find view platform transformgroup
     TransformGroup viewTg = universe.getViewingPlatform().getViewPlatformTransform();
@@ -130,7 +132,7 @@ class Main {
 
   // This function add a directional light to the world with the default direction.
   private void addDirectionalLight(BranchGroup branchGroup) {
-    addDirectionalLight(branchGroup, 1.0f, 1.0f, 1.0f);
+    addDirectionalLight(branchGroup, 1.0f, 0.0f, 1.0f);
   }
 
   // This function add a directional light to the world with a custom direction.

@@ -112,6 +112,7 @@ public class Tetto extends Group {
       this.baseLength,
       this.tettoAppearance
     );
+    // add correct transformation to tg
     Transform3D translate = new Transform3D();
     translate.setTranslation(new Vector3d(
       0.0f,

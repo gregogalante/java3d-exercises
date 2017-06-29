@@ -57,7 +57,10 @@ public class Facciata extends Group {
     textureAttributes.setPerspectiveCorrectionMode(TextureAttributes.NICEST);
     appearance.setTextureAttributes(textureAttributes);
     // initialize and add text coordinates generator
-    TexCoordGeneration tcg = new TexCoordGeneration(TexCoordGeneration.OBJECT_LINEAR, TexCoordGeneration.TEXTURE_COORDINATE_3);
+    TexCoordGeneration tcg = new TexCoordGeneration(
+      TexCoordGeneration.OBJECT_LINEAR,
+      TexCoordGeneration.TEXTURE_COORDINATE_3
+    );
 	  appearance.setTexCoordGeneration(tcg);
     // add style
     appearance.setPolygonAttributes(new PolygonAttributes(

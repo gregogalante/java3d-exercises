@@ -32,7 +32,7 @@ import com.sun.j3d.utils.geometry.ColorCube;
 
 class Main {
 
-  private BoundingSphere defaultBound = new BoundingSphere(new Point3d(), 10.0d);
+  private BoundingSphere defaultBound = new BoundingSphere(new Point3d(), 100.0d);
 
   public Main() {
     // initialize a new simple universe
@@ -43,7 +43,7 @@ class Main {
     BranchGroup branchGroup = createBranchGroup();
     
     // translate user position
-    // translateLookAt(universe, 1.0f, 1.0f, 4.0f);
+    translateLookAt(universe, 0.0f, 1.0f, 10.0f);
 
     // add key movements to branchGroup
     addKeyMovementsToBranchGroup(universe, branchGroup);
@@ -52,13 +52,13 @@ class Main {
     // addAmbientLight(branchGroup);
 
     // add directional light to branchGroup
-    // addDirectionalLight(branchGroup);
+    addDirectionalLight(branchGroup);
 
     // add spot light to branchGroup
     // addSpotLight(branchGroup);
 
     // add a background image to the branchGroup
-    // addBackground(branchGroup, "images/stars.jpg");
+    addBackground(branchGroup, "../../images/terrain.jpg");
 
     // add branchgroup to universe
     branchGroup.compile();
@@ -71,7 +71,7 @@ class Main {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new ColorCube(0.3)); // <-- NOTE: edit here with other components. ***
+    tg.addChild(new Tempio()); // <-- NOTE: edit here with other components. ***
     // add tg to bg
     bg.addChild(tg);
     // return bg
@@ -93,7 +93,7 @@ class Main {
     Transform3D lookAtT3D = new Transform3D();
     lookAtT3D.lookAt(
       new Point3d (x, y, z),
-      new Point3d (0.0, 0.0, 0.0),
+      new Point3d (0.0, 1.0, 0.0),
       new Vector3d(0.0, 1.0, 0.0)
     );
     lookAtT3D.invert();

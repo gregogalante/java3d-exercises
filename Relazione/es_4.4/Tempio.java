@@ -32,6 +32,8 @@ public class Tempio extends Group {
     addColonneChild();
     // create tetto
     addTettoChild();
+    // create colonne internal
+    addColonneInternalChild();
   }
 
   protected Appearance createAppearance() {
@@ -69,6 +71,9 @@ public class Tempio extends Group {
     // return the appearance
     return appearance;
   }
+
+  // Colonne:
+  // ********************************************************
 
   protected void addColonneChild() {
     // front
@@ -112,6 +117,55 @@ public class Tempio extends Group {
     return tg;
   }
 
+  // Colonne internal:
+  // ********************************************************
+
+  protected void addColonneInternalChild() {
+    // front
+    for (int i = 0; i < 4; i++) {
+      addChild(createColonnaInternal(i, "front"));
+    }
+    // back
+    for (int i = 0; i < 4; i++) {
+      addChild(createColonnaInternal(i, "back"));
+    }
+    // left
+    for (int i = 0; i < 8; i++) {
+      addChild(createColonnaInternal(i, "left"));
+    }
+    // right
+    for (int i = 0; i < 8; i++) {
+      addChild(createColonnaInternal(i, "right"));
+    }
+  }
+
+  protected TransformGroup createColonnaInternal(int numColonna, String type) {
+    TransformGroup tg = new TransformGroup();
+    float height = ((type == "front" || type == "back") ? 2.0f : 1.7f);
+    Colonna colonna = new Colonna(height, this.tempioAppearance);
+    tg.addChild(colonna);
+    // add correct transformation to tg
+    Transform3D translate = new Transform3D();
+    if (type == "front" || type == "back") {
+      translate.setTranslation(new Vector3d(
+        ((numColonna > 2) ? -(1.5 - numColonna) : (numColonna - 1.5)),
+        (this.scalinataHeight + 1),
+        (type == "front" ? 4f : -4f)
+      ));
+    } else {
+      translate.setTranslation(new Vector3d(
+        (type == "left" ? 1.5f : -1.5f),
+        (this.scalinataHeight + 0.85f),
+        ((numColonna > 3) ? -(1.75 - (numColonna / 1.95)) : ((numColonna / 1.95) - 1.75))
+      ));
+    }
+    tg.setTransform(translate);
+    return tg;
+  }
+
+  // Tetto:
+  // ********************************************************
+
   protected void addTettoChild() {
     addChild(createTetto("front"));
     addChild(createTetto("back"));
@@ -145,6 +199,9 @@ public class Tempio extends Group {
     tg.setTransform(translate);
     return tg;
   }
+
+  // Scalinata:
+  // ********************************************************
 
   protected TransformGroup createScalinata() {
     TransformGroup tg = new TransformGroup();

@@ -1,6 +1,6 @@
 /*
 
-Main.java VERSION 1.4
+Main.java VERSION 1.5
 
 This class is a base main object for projects.
 
@@ -72,6 +72,8 @@ class Main {
     // create main tg
     TransformGroup tg = new TransformGroup();
     tg.addChild(new ColorCube(0.3)); // <-- NOTE: edit here with other components. ***
+    // rotate tg with mouse
+    addMouseMovementsToBransformGroup(tg, bg);
     // add tg to bg
     bg.addChild(tg);
     // return bg
@@ -114,6 +116,18 @@ class Main {
 
     // add behaviour to branchgroup
     branchGroup.addChild(keyNavBeh);
+  }
+
+  private void addMouseMovementsToBransformGroup(TransformGroup transformGroup, BranchGroup branchGroup) {
+		// permit movements
+		transformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+		transformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+		// create behaviour
+		MouseRotate mouseRotate = new MouseRotate(transformGroup);
+		// set boundingsphere
+		mouseRotate.setSchedulingBounds(this.defaultBound);
+    // add all
+		branchGroup.addChild(mouseRotate);
   }
 
   // World lights:

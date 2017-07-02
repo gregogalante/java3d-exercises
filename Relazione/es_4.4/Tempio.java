@@ -167,9 +167,13 @@ public class Tempio extends Group {
   // ********************************************************
 
   protected void addTettoChild() {
+    // front
     addChild(createTetto("front"));
+    // back
     addChild(createTetto("back"));
+    // left
     addChild(createTetto("left"));
+    // right
     addChild(createTetto("right"));
   }
 

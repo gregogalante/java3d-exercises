@@ -1,6 +1,6 @@
 public interface InterfaceTextures {
 
-  public static final String TEXTURES_PATH = "../images/";
+  public static final String TEXTURES_PATH = "../../images/";
   
   public static final String TEXTURE_BORG = TEXTURES_PATH + "borg.jpg";
   public static final String TEXTURE_EARTH = TEXTURES_PATH + "earth.jpg";

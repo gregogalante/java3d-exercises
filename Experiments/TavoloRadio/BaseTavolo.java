@@ -7,45 +7,34 @@ import javax.media.j3d.Transform3D;
 import javax.media.j3d.Texture;
 import javax.media.j3d.TextureAttributes;
 import javax.media.j3d.TexCoordGeneration;
-import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.Alpha;
-import javax.media.j3d.RotationInterpolator;
 
 import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 
 import com.sun.j3d.utils.image.TextureLoader;
+import com.sun.j3d.utils.geometry.Cylinder;
 
-// import ColorCube as default child
-import com.sun.j3d.utils.geometry.ColorCube;
-
-class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
+class BaseTavolo extends Group implements InterfaceTextures, InterfaceColors {
 
   protected Appearance appearance;
-  protected BoundingSphere bound;
   protected float size;
 
   // Constructors:
   // *******************************************************************************************
 
-  public MyGroup(float size) {
-    this(size, null, null);
+  public BaseTavolo(float size) {
+    this(size, null);
   }
 
-  public MyGroup(float size, BoundingSphere bound) {
-    this(size, bound, null);
-  }
-
-  public MyGroup(float size, BoundingSphere bound, Appearance appearance) {
+  public BaseTavolo(float size, Appearance appearance) {
     // initial settings
     if (appearance == null) {
       this.appearance = createAppearance();
     }
-    if (bound == null) {
-      this.bound = createBoundingSphere();
-    }
     this.size = size;
     // add children
-    addChild(new ColorCube(this.size));
+    addChild(createCilindro());
+    addChild(createEchino());
   }
   
   // Default datas:
@@ -56,8 +45,6 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
     Appearance appearance = new Appearance();
     // add material
     Material material = new Material();
-    material.setShininess(80.0f);
-	  material.setSpecularColor(COLOR_WHITE);
     appearance.setMaterial(material);
     // add style
     appearance.setPolygonAttributes(new PolygonAttributes(
@@ -65,56 +52,48 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
       PolygonAttributes.CULL_NONE,
       0
     ));
+    // add texture
+    addTextureToAppearance(appearance, TEXTURE_MARMO_PANNA);
     // return the appearance
     return appearance;
-  }
-
-  // This function creates the bounding sphere for the object.
-  protected BoundingSphere createBoundingSphere() {
-    return new BoundingSphere(new Point3d(), 10.0d);
   }
 
   // Elements:
   // *******************************************************************************************
 
-  protected TransformGroup createSomething() {
+  protected TransformGroup createCilindro() {
+    TransformGroup tg = new TransformGroup();
+    Cylinder cylinder = new Cylinder(
+      this.size,
+      this.size * 4,
+      -Cylinder.GENERATE_NORMALS|Cylinder.GENERATE_TEXTURE_COORDS,
+      this.appearance
+    );
+    tg.addChild(cylinder);
+    return tg;
+  }
+
+  protected TransformGroup createEchino() {
     TransformGroup tg = new TransformGroup();
 
-    // Add your code here ...
+    MyCylinder cylinder = new MyCylinder(
+      this.size,
+      this.size * 1.25f,
+      this.size,
+      this.appearance
+    );
+    tg.addChild(cylinder);
 
     // add transformations
     Transform3D t = new Transform3D();
+    t.setTranslate(new Vector3d(0.0f, this.size * 4, 0.0f));
     tg.setTransform(t);
-    
     // return tg
     return tg;
   }
 
   // Helpers:
   // *******************************************************************************************
-
-  // This function add a rotation to a transformgroup object.
-  protected void addRotationToTG(TransformGroup tg, float rotation) {
-    // create transformation for the sphere rotation
-    Transform3D sphereRotation = new Transform3D();
-		sphereRotation.rotY(- Math.PI / 4.0f);
-    // create alpha
-		Alpha alpha = new Alpha(-1, 50000);
-    // create rotation interpolator
-		RotationInterpolator sphereRotationInterpolator = new RotationInterpolator(
-      alpha,
-      tg,
-      sphereRotation,
-      0.0f,
-      (float) Math.PI * rotation
-    );
-    // create bounding sphere and set to interpolator
-		sphereRotationInterpolator.setSchedulingBounds(this.bound);
-    // permit rotation after the creation
-		tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-    // add sphere as tg child
-    tg.addChild(sphereRotationInterpolator);
-  }
 
   // This function add a texture to an appeance object.
   protected void addTextureToAppearance(Appearance appearance, String texturePath) {

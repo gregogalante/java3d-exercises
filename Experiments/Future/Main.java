@@ -43,7 +43,7 @@ class Main {
     BranchGroup branchGroup = createBranchGroup();
     
     // translate user position
-    // translateLookAt(universe, 1.0f, 1.0f, 4.0f);
+    translateLookAt(universe, 0.0f, 0.0f, 6.0f);
 
     // add key movements to branchGroup
     addKeyMovementsToBranchGroup(universe, branchGroup);
@@ -52,13 +52,13 @@ class Main {
     // addAmbientLight(branchGroup);
 
     // add directional light to branchGroup
-    // addDirectionalLight(branchGroup);
+    addDirectionalLight(branchGroup);
 
     // add spot light to branchGroup
     // addSpotLight(branchGroup);
 
     // add a background image to the branchGroup
-    // addBackground(branchGroup, "images/stars.jpg");
+    addBackground(branchGroup, "../../images/space.jpg");
 
     // add branchgroup to universe
     branchGroup.compile();
@@ -71,7 +71,7 @@ class Main {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new ColorCube(0.3)); // <-- NOTE: edit here with other components. ***
+    tg.addChild(new Navicella(1.0f));
     // rotate tg with mouse
     addMouseMovementsToBransformGroup(tg, bg);
     // add tg to bg
@@ -145,7 +145,7 @@ class Main {
 
   // This function add a directional light to the world with the default direction.
   private void addDirectionalLight(BranchGroup branchGroup) {
-    addDirectionalLight(branchGroup, 1.0f, 1.0f, 1.0f);
+    addDirectionalLight(branchGroup, 3.0f, 0.0f, 1.0f);
   }
 
   // This function add a directional light to the world with a custom direction.

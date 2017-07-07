@@ -56,8 +56,8 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
     Appearance appearance = new Appearance();
     // add material
     Material material = new Material();
-    material.setShininess(80.0f);
-	  material.setSpecularColor(COLOR_WHITE);
+    // material.setShininess(80.0f); // SUG: Imposta il comportamento relativo alla riflessione della luce.
+    // material.setLightingEnable(true); // SUG. Imposta se il materiale deve considerare o meno la luce.
     appearance.setMaterial(material);
     // add style
     appearance.setPolygonAttributes(new PolygonAttributes(
@@ -93,50 +93,50 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
   // Helpers:
   // *******************************************************************************************
 
-  // This function add a rotation to a transformgroup object.
-  protected void addRotationToTG(TransformGroup tg, float rotation) {
-    // create transformation for the sphere rotation
-    Transform3D sphereRotation = new Transform3D();
-		sphereRotation.rotY(- Math.PI / 4.0f);
-    // create alpha
-		Alpha alpha = new Alpha(-1, 50000);
-    // create rotation interpolator
-		RotationInterpolator sphereRotationInterpolator = new RotationInterpolator(
-      alpha,
-      tg,
-      sphereRotation,
-      0.0f,
-      (float) Math.PI * rotation
-    );
-    // create bounding sphere and set to interpolator
-		sphereRotationInterpolator.setSchedulingBounds(this.bound);
-    // permit rotation after the creation
-		tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-    // add sphere as tg child
-    tg.addChild(sphereRotationInterpolator);
-  }
+  // // This function add a rotation to a transformgroup object.
+  // protected void addRotationToTG(TransformGroup tg, float rotation) {
+  //   // create transformation for the sphere rotation
+  //   Transform3D sphereRotation = new Transform3D();
+	// 	sphereRotation.rotY(- Math.PI / 4.0f);
+  //   // create alpha
+	// 	Alpha alpha = new Alpha(-1, 50000);
+  //   // create rotation interpolator
+	// 	RotationInterpolator sphereRotationInterpolator = new RotationInterpolator(
+  //     alpha,
+  //     tg,
+  //     sphereRotation,
+  //     0.0f,
+  //     (float) Math.PI * rotation
+  //   );
+  //   // create bounding sphere and set to interpolator
+	// 	sphereRotationInterpolator.setSchedulingBounds(this.bound);
+  //   // permit rotation after the creation
+	// 	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+  //   // add sphere as tg child
+  //   tg.addChild(sphereRotationInterpolator);
+  // }
 
-  // This function add a texture to an appeance object.
-  protected void addTextureToAppearance(Appearance appearance, String texturePath) {
-    // load texture file
-    TextureLoader textureLoader = new TextureLoader(texturePath, null);
-    // set texture
-    Texture texture = textureLoader.getTexture();
-    texture.setBoundaryModeS(Texture.WRAP);
-		texture.setBoundaryModeT(Texture.WRAP);
-    // add texture to the appearance
-    appearance.setTexture(texture);
-    // initialize texture attributes
-    TextureAttributes textureAttributes = new TextureAttributes();
-	  textureAttributes.setTextureMode(TextureAttributes.COMBINE);
-    textureAttributes.setPerspectiveCorrectionMode(TextureAttributes.NICEST);
-    appearance.setTextureAttributes(textureAttributes);
-    // initialize and add text coordinates generator
-    TexCoordGeneration tcg = new TexCoordGeneration(
-      TexCoordGeneration.OBJECT_LINEAR,
-      TexCoordGeneration.TEXTURE_COORDINATE_3
-    );
-	  appearance.setTexCoordGeneration(tcg);
-  }
+  // // This function add a texture to an appeance object.
+  // protected void addTextureToAppearance(Appearance appearance, String texturePath) {
+  //   // load texture file
+  //   TextureLoader textureLoader = new TextureLoader(texturePath, null);
+  //   // set texture
+  //   Texture texture = textureLoader.getTexture();
+  //   texture.setBoundaryModeS(Texture.WRAP);
+	// 	texture.setBoundaryModeT(Texture.WRAP);
+  //   // add texture to the appearance
+  //   appearance.setTexture(texture);
+  //   // initialize texture attributes
+  //   TextureAttributes textureAttributes = new TextureAttributes();
+	//   textureAttributes.setTextureMode(TextureAttributes.COMBINE);
+  //   textureAttributes.setPerspectiveCorrectionMode(TextureAttributes.NICEST);
+  //   appearance.setTextureAttributes(textureAttributes);
+  //   // initialize and add text coordinates generator
+  //   TexCoordGeneration tcg = new TexCoordGeneration(
+  //     TexCoordGeneration.OBJECT_LINEAR,
+  //     TexCoordGeneration.TEXTURE_COORDINATE_3
+  //   );
+	//   appearance.setTexCoordGeneration(tcg);
+  // }
 
 }

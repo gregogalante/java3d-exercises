@@ -77,8 +77,8 @@ class BaseTavolo extends Group implements InterfaceTextures, InterfaceColors {
     TransformGroup tg = new TransformGroup();
 
     MyCylinder cylinder = new MyCylinder(
-      this.size,
       this.size * 1.25f,
+      this.size,
       this.size,
       this.appearance
     );
@@ -86,7 +86,7 @@ class BaseTavolo extends Group implements InterfaceTextures, InterfaceColors {
 
     // add transformations
     Transform3D t = new Transform3D();
-    t.setTranslate(new Vector3d(0.0f, this.size * 4, 0.0f));
+    t.setTranslation(new Vector3d(0.0f, this.size * 2.25, 0.0f));
     tg.setTransform(t);
     // return tg
     return tg;

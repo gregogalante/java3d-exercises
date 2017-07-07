@@ -24,8 +24,20 @@ class TavoloRadio extends Group implements InterfaceColors {
       this.bound = createBoundingSphere();
     }
     this.size = size;
-    // add children
-    addChild(new BaseTavolo(this.size));
+    // add base tavolo
+    // addChild(new BaseTavolo(this.size));
+    // create piano with radio
+    TransformGroup pianoTavoloRadio = new TransformGroup();
+    pianoTavoloRadio.addChild(createPianoTavolo());
+    addRotationToTG(pianoTavoloRadio, 1.0f);
+    addChild(pianoTavoloRadio);
+  }
+
+  protected TransformGroup createPianoTavolo() {
+    TransformGroup tg = new TransformGroup();
+    PianoTavolo pianoTavolo = new PianoTavolo(this.size);
+    tg.addChild(pianoTavolo);
+    return tg;
   }
   
   // Default datas:

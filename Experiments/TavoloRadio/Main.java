@@ -36,7 +36,7 @@ class Main implements InterfaceTextures, InterfaceColors {
     BranchGroup branchGroup = createBranchGroup();
     
     // translate user position
-    // translateLookAt(universe);
+    translateLookAt(universe);
 
     // add key movements to branchGroup
     addKeyMovementsToBranchGroup(universe, branchGroup);

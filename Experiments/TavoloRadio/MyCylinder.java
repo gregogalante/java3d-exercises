@@ -4,6 +4,7 @@ import javax.media.j3d.PolygonAttributes;
 import javax.media.j3d.Shape3D;
 import javax.media.j3d.TriangleStripArray;
 import javax.vecmath.Point3f;
+import javax.media.j3d.ColoringAttributes;
 
 import com.sun.j3d.utils.geometry.GeometryInfo;
 import com.sun.j3d.utils.geometry.NormalGenerator;

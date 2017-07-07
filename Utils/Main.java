@@ -1,14 +1,7 @@
-/*
-
-Main.java VERSION 1.5
-
-This class is a base main object for projects.
-
-*/
-
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.Transform3D;
+import javax.media.j3d.Light;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.AmbientLight;
 import javax.media.j3d.DirectionalLight;
@@ -30,7 +23,7 @@ import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 // import ColorCube as default tg child
 import com.sun.j3d.utils.geometry.ColorCube;
 
-class Main {
+class Main implements InterfaceTextures, InterfaceColors {
 
   private BoundingSphere defaultBound = new BoundingSphere(new Point3d(), 10.0d);
 
@@ -43,10 +36,10 @@ class Main {
     BranchGroup branchGroup = createBranchGroup();
     
     // translate user position
-    // translateLookAt(universe, 1.0f, 1.0f, 4.0f);
+    // translateLookAt(universe);
 
     // add key movements to branchGroup
-    addKeyMovementsToBranchGroup(universe, branchGroup);
+    // addKeyMovementsToBranchGroup(universe, branchGroup);
 
     // add ambient light to branchGroup
     // addAmbientLight(branchGroup);
@@ -58,7 +51,7 @@ class Main {
     // addSpotLight(branchGroup);
 
     // add a background image to the branchGroup
-    // addBackground(branchGroup, "images/stars.jpg");
+    // addBackground(branchGroup, TEXTURE_STARS);
 
     // add branchgroup to universe
     branchGroup.compile();
@@ -71,7 +64,7 @@ class Main {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new ColorCube(0.3)); // <-- NOTE: edit here with other components. ***
+    tg.addChild(new MyGroup(0.3f));
     // rotate tg with mouse
     addMouseMovementsToBransformGroup(tg, bg);
     // add tg to bg
@@ -83,8 +76,13 @@ class Main {
   // User movements:
   // *******************************************************************************************
 
+  // This function translates the user position on the world with default values.
+  private void translateLookAt(SimpleUniverse universe) {
+    translateLookAt(universe, 0.0f, 0.0f, 4.0f, 0.0f, 0.0f, 0.0f);
+  }
+
   // This function translates the user position on the world.
-  private void translateLookAt(SimpleUniverse universe, float x, float y, float z) {
+  private void translateLookAt(SimpleUniverse universe, float x, float y, float z, float tx, float ty, float tz) {
     // find viewing platform
     ViewingPlatform viewingPlatform = universe.getViewingPlatform();
     // find view
@@ -95,7 +93,7 @@ class Main {
     Transform3D lookAtT3D = new Transform3D();
     lookAtT3D.lookAt(
       new Point3d (x, y, z),
-      new Point3d (0.0, 0.0, 0.0),
+      new Point3d (tx, ty, tz),
       new Vector3d(0.0, 1.0, 0.0)
     );
     lookAtT3D.invert();
@@ -139,6 +137,8 @@ class Main {
     AmbientLight light = new AmbientLight();
     // add bounds to light
     light.setInfluencingBounds(this.defaultBound);
+    // add shared settings
+    addSharedSettingsToLight(light);
     // add light to tg
     branchGroup.addChild(light);
   }
@@ -155,25 +155,38 @@ class Main {
     light.setDirection(dirX, dirY, dirX);
     // add bounds to light
     light.setInfluencingBounds(this.defaultBound);
+    // add shared settings
+    addSharedSettingsToLight(light);
     // add light to tg
     branchGroup.addChild(light);
   }
 
   // This function add a spot light with default position and angle.
   private void addSpotLight(BranchGroup branchGroup) {
-    addSpotLight(branchGroup, 0.0f, 0.0f, 1.0f, (float) Math.PI / 2.0f);
+    addSpotLight(branchGroup, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, (float) Math.PI / 2.0f);
   }
 
   // This function add a spot light to the world with custom position and angle.
-  private void addSpotLight(BranchGroup branchGroup, float posX, float posY, float posZ, float angle) {
+  private void addSpotLight(BranchGroup branchGroup, float dirX, float dirY, float dirZ, float posX, float posY, float posZ, float angle) {
     // create light
     SpotLight light = new SpotLight();
+    light.setDirection(dirX, dirY, dirX);
     light.setPosition(new Point3f(posX, posY, posZ));
 		light.setSpreadAngle(angle);
     // add bounds to light
     light.setInfluencingBounds(this.defaultBound);
+    // add shared settings
+    addSharedSettingsToLight(light);
     // add light to tg
     branchGroup.addChild(light);
+  }
+
+  // This function set shared settings to light.
+  private void addSharedSettingsToLight(Light light) {
+    // set color light
+    // light.setColor();
+    // enable light
+    light.setEnable(true);
   }
 
   // World background:

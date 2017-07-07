@@ -11,9 +11,9 @@ public interface InterfaceColors {
 
   public static Color3f hex2Color3f(String colorStr) {
     return new Color3f(
-      Integer.valueOf(colorStr.substring(1, 3), 16),
-      Integer.valueOf(colorStr.substring(3, 5), 16),
-      Integer.valueOf(colorStr.substring(5, 7), 16)
+      Integer.valueOf( colorStr.substring( 1, 3 ), 16 ) / (float) 255,
+      Integer.valueOf( colorStr.substring( 3, 5 ), 16 ) / (float) 255,
+      Integer.valueOf( colorStr.substring( 5, 7 ), 16 ) / (float) 255
     );
   }
   

@@ -10,6 +10,7 @@ import javax.media.j3d.TexCoordGeneration;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.Alpha;
 import javax.media.j3d.RotationInterpolator;
+import javax.media.j3d.TransparencyAttributes;
 
 import javax.vecmath.Point3d;
 
@@ -56,9 +57,18 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
     Appearance appearance = new Appearance();
     // add material
     Material material = new Material();
-    // material.setShininess(80.0f); // SUG: Imposta il comportamento relativo alla riflessione della luce.
-    // material.setLightingEnable(true); // SUG. Imposta se il materiale deve considerare o meno la luce.
+    // material.setEmissiveColor(COLOR_GREY); // light: not illuminated zone | no_light: object color
+    // material.setAmbientColor(COLOR_GREY); // light: not illuminated zone | no_light: partial object color
+    // material.setDiffuseColor(COLOR_GREY); // light: illuminated zone | no_light: none
+    // material.setSpecularColor(COLOR_GREY); // light: reflection | no_light: none
+    // material.setShininess(80.0f);
+    // material.setLightingEnable(true);
     appearance.setMaterial(material);
+    // add trasparency
+    // TransparencyAttributes transparencyAttributes = new TransparencyAttributes();
+    // transparencyAttributes.setTransparencyMode(TransparencyAttributes.BLENDED);
+    // transparencyAttributes.setTransparency(0.5f);
+    // appearance.setTransparencyAttributes(transparencyAttributes);
     // add style
     appearance.setPolygonAttributes(new PolygonAttributes(
       PolygonAttributes.POLYGON_FILL,

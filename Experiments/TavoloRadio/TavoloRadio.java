@@ -6,6 +6,7 @@ import javax.media.j3d.Alpha;
 import javax.media.j3d.RotationInterpolator;
 
 import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 
 class TavoloRadio extends Group implements InterfaceColors {
 
@@ -25,10 +26,11 @@ class TavoloRadio extends Group implements InterfaceColors {
     }
     this.size = size;
     // add base tavolo
-    // addChild(new BaseTavolo(this.size));
+    addChild(new BaseTavolo(this.size));
     // create piano with radio
     TransformGroup pianoTavoloRadio = new TransformGroup();
     pianoTavoloRadio.addChild(createPianoTavolo());
+    pianoTavoloRadio.addChild(createRadio());
     addRotationToTG(pianoTavoloRadio, 1.0f);
     addChild(pianoTavoloRadio);
   }
@@ -37,6 +39,19 @@ class TavoloRadio extends Group implements InterfaceColors {
     TransformGroup tg = new TransformGroup();
     PianoTavolo pianoTavolo = new PianoTavolo(this.size);
     tg.addChild(pianoTavolo);
+    Transform3D translate = new Transform3D();
+    translate.setTranslation(new Vector3d(0.0f, this.size * 3, 0.0f));
+    tg.setTransform(translate);
+    return tg;
+  }
+
+  protected TransformGroup createRadio() {
+    TransformGroup tg = new TransformGroup();
+    Radio radio = new Radio(this.size);
+    tg.addChild(radio);
+    Transform3D translate = new Transform3D();
+    translate.setTranslation(new Vector3d(0.0f, this.size * 3.5, 0.0f));
+    tg.setTransform(translate);
     return tg;
   }
   

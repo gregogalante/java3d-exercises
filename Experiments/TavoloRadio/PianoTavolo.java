@@ -7,6 +7,7 @@ import javax.media.j3d.Transform3D;
 import javax.media.j3d.Texture;
 import javax.media.j3d.TextureAttributes;
 import javax.media.j3d.TexCoordGeneration;
+import javax.media.j3d.TransparencyAttributes;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
@@ -44,7 +45,18 @@ class PianoTavolo extends Group implements InterfaceTextures, InterfaceColors {
     Appearance appearance = new Appearance();
     // add material
     Material material = new Material();
+    material.setEmissiveColor(COLOR_VIOLET); // light: not illuminated zone | no_light: object color
+    material.setAmbientColor(COLOR_VIOLET); // light: not illuminated zone | no_light: partial object color
+    material.setDiffuseColor(COLOR_VIOLET); // light: illuminated zone | no_light: none
+    material.setSpecularColor(COLOR_VIOLET); // light: reflection | no_light: none
+    // material.setShininess(80.0f);
+    // material.setLightingEnable(true);
     appearance.setMaterial(material);
+    // add trasparency
+    TransparencyAttributes transparencyAttributes = new TransparencyAttributes();
+    transparencyAttributes.setTransparencyMode(TransparencyAttributes.BLENDED);
+    transparencyAttributes.setTransparency(0.4f);
+    appearance.setTransparencyAttributes(transparencyAttributes);
     // add style
     appearance.setPolygonAttributes(new PolygonAttributes(
       PolygonAttributes.POLYGON_FILL,

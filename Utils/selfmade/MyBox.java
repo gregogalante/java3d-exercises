@@ -17,12 +17,12 @@ public class MyBox extends Shape3D implements InterfaceColors {
   protected Point3d [] vectors = new Point3d[14];
   protected TriangleStripArray triangleStrip = null;
 
-  public MyBox(float top, float bottom, float height) {
-    this(top, bottom, height, null);
+  public MyBox(float width, float length, float height) {
+    this(width, length, height, null);
   }
 
-  public MyBox(float top, float bottom, float height, float appearance) {
-    this(top, top, bottom, bottom, height, appearance);
+  public MyBox(float width, float length, float height, Appearance appearance) {
+    this(width, length, width, length, height, appearance);
   }
 
   public MyBox(float topWidth, float topLength, float bottomWidth, float bottomLength, float height, Appearance appearance) {

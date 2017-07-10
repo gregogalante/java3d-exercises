@@ -136,7 +136,7 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
     tg.addChild(sphereRotationInterpolator);
   }
 
-  // This function add a texture to an appeance object.
+  // This function add a texture to an appearance object.
   protected void addTextureToAppearance(Appearance appearance, String texturePath) {
     // load texture file
     TextureLoader textureLoader = new TextureLoader(texturePath, null);

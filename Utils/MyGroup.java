@@ -38,16 +38,8 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
 
   public MyGroup(float size, BoundingSphere bound, Appearance appearance) {
     // initial settings
-    if (appearance == null) {
-      this.appearance = createAppearance();
-    } else {
-      this.appearance = appearance;
-    }
-    if (bound == null) {
-      this.bound = createBoundingSphere();
-    } else {
-      this.bound = bound;
-    }
+    this.appearance = (appearance == null) ? createAppearance() : appearance;
+    this.bound = (bound == null) ? createBoundingSphere() : bound;
     this.size = size;
     // add children
     addChild(createSomething());

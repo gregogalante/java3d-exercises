@@ -39,16 +39,16 @@ class Main implements InterfaceTextures, InterfaceColors {
     // translateLookAt(universe);
 
     // add key movements to branchGroup
-    // addKeyMovementsToBranchGroup(universe, branchGroup);
+    addKeyMovementsToBranchGroup(universe, branchGroup);
 
     // add ambient light to branchGroup
-    // addAmbientLight(branchGroup);
+    addAmbientLight(branchGroup);
 
     // add directional light to branchGroup
-    // addDirectionalLight(branchGroup);
+    addDirectionalLight(branchGroup);
 
     // add spot light to branchGroup
-    // addSpotLight(branchGroup);
+    addSpotLight(branchGroup);
 
     // add a background image to the branchGroup
     // addBackground(branchGroup, TEXTURE_STARS);
@@ -181,7 +181,7 @@ class Main implements InterfaceTextures, InterfaceColors {
     branchGroup.addChild(light);
   }
 
-  // This function set shared settings to light.
+  // This function sets shared settings to light.
   private void addSharedSettingsToLight(Light light) {
     // set color light
     // light.setColor();

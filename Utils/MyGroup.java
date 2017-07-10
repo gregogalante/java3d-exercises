@@ -11,13 +11,13 @@ import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.Alpha;
 import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.TransparencyAttributes;
+import javax.media.j3d.Shape3D;
 
 import javax.vecmath.Point3d;
 
 import com.sun.j3d.utils.image.TextureLoader;
 
-// import ColorCube as default child
-import com.sun.j3d.utils.geometry.ColorCube;
+import com.sun.j3d.utils.geometry.Box;
 
 class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
 
@@ -50,7 +50,7 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
     }
     this.size = size;
     // add children
-    addChild(new ColorCube(this.size));
+    addChild(createSomething());
   }
   
   // Default datas:
@@ -73,6 +73,8 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
     // transparencyAttributes.setTransparencyMode(TransparencyAttributes.BLENDED);
     // transparencyAttributes.setTransparency(0.5f);
     // appearance.setTransparencyAttributes(transparencyAttributes);
+    // add the texture
+    // addTextureToAppearance(appearance, TEXTURE_BORG);
     // add style
     appearance.setPolygonAttributes(new PolygonAttributes(
       PolygonAttributes.POLYGON_FILL,
@@ -94,11 +96,23 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
   protected TransformGroup createSomething() {
     TransformGroup tg = new TransformGroup();
 
-    // Add your code here ...
+    // Use a box as example
+    Box box = new Box(
+      this.size,
+      this.size,
+      this.size,
+      -Box.GENERATE_NORMALS|Box.GENERATE_TEXTURE_COORDS,
+      this.appearance
+    );
+    // add object to tg
+    tg.addChild(box);
 
     // add transformations
     Transform3D t = new Transform3D();
     tg.setTransform(t);
+
+    // add a rotation
+    // addRotationToTG(tg, 1.0f);
     
     // return tg
     return tg;
@@ -107,50 +121,50 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
   // Helpers:
   // *******************************************************************************************
 
-  // // This function add a rotation to a transformgroup object.
-  // protected void addRotationToTG(TransformGroup tg, float rotation) {
-  //   // create transformation for the sphere rotation
-  //   Transform3D sphereRotation = new Transform3D();
-	// 	sphereRotation.rotY(- Math.PI / 4.0f);
-  //   // create alpha
-	// 	Alpha alpha = new Alpha(-1, 50000);
-  //   // create rotation interpolator
-	// 	RotationInterpolator sphereRotationInterpolator = new RotationInterpolator(
-  //     alpha,
-  //     tg,
-  //     sphereRotation,
-  //     0.0f,
-  //     (float) Math.PI * rotation
-  //   );
-  //   // create bounding sphere and set to interpolator
-	// 	sphereRotationInterpolator.setSchedulingBounds(this.bound);
-  //   // permit rotation after the creation
-	// 	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-  //   // add sphere as tg child
-  //   tg.addChild(sphereRotationInterpolator);
-  // }
+  // This function add a rotation to a transformgroup object.
+  protected void addRotationToTG(TransformGroup tg, float rotation) {
+    // create transformation for the sphere rotation
+    Transform3D sphereRotation = new Transform3D();
+		sphereRotation.rotY(- Math.PI / 4.0f);
+    // create alpha
+		Alpha alpha = new Alpha(-1, 50000);
+    // create rotation interpolator
+		RotationInterpolator sphereRotationInterpolator = new RotationInterpolator(
+      alpha,
+      tg,
+      sphereRotation,
+      0.0f,
+      (float) Math.PI * rotation
+    );
+    // create bounding sphere and set to interpolator
+		sphereRotationInterpolator.setSchedulingBounds(this.bound);
+    // permit rotation after the creation
+		tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+    // add sphere as tg child
+    tg.addChild(sphereRotationInterpolator);
+  }
 
-  // // This function add a texture to an appeance object.
-  // protected void addTextureToAppearance(Appearance appearance, String texturePath) {
-  //   // load texture file
-  //   TextureLoader textureLoader = new TextureLoader(texturePath, null);
-  //   // set texture
-  //   Texture texture = textureLoader.getTexture();
-  //   texture.setBoundaryModeS(Texture.WRAP);
-	// 	texture.setBoundaryModeT(Texture.WRAP);
-  //   // add texture to the appearance
-  //   appearance.setTexture(texture);
-  //   // initialize texture attributes
-  //   TextureAttributes textureAttributes = new TextureAttributes();
-	//   textureAttributes.setTextureMode(TextureAttributes.COMBINE);
-  //   textureAttributes.setPerspectiveCorrectionMode(TextureAttributes.NICEST);
-  //   appearance.setTextureAttributes(textureAttributes);
-  //   // initialize and add text coordinates generator
-  //   TexCoordGeneration tcg = new TexCoordGeneration(
-  //     TexCoordGeneration.OBJECT_LINEAR,
-  //     TexCoordGeneration.TEXTURE_COORDINATE_3
-  //   );
-	//   appearance.setTexCoordGeneration(tcg);
-  // }
+  // This function add a texture to an appeance object.
+  protected void addTextureToAppearance(Appearance appearance, String texturePath) {
+    // load texture file
+    TextureLoader textureLoader = new TextureLoader(texturePath, null);
+    // set texture
+    Texture texture = textureLoader.getTexture();
+    texture.setBoundaryModeS(Texture.WRAP);
+		texture.setBoundaryModeT(Texture.WRAP);
+    // add texture to the appearance
+    appearance.setTexture(texture);
+    // initialize texture attributes
+    TextureAttributes textureAttributes = new TextureAttributes();
+	  textureAttributes.setTextureMode(TextureAttributes.COMBINE);
+    textureAttributes.setPerspectiveCorrectionMode(TextureAttributes.NICEST);
+    appearance.setTextureAttributes(textureAttributes);
+    // initialize and add text coordinates generator
+    TexCoordGeneration tcg = new TexCoordGeneration(
+      TexCoordGeneration.OBJECT_LINEAR,
+      TexCoordGeneration.TEXTURE_COORDINATE_3
+    );
+	  appearance.setTexCoordGeneration(tcg);
+  }
 
 }

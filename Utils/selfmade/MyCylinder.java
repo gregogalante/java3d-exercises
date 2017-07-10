@@ -16,15 +16,15 @@ public class MyCylinder extends Shape3D implements InterfaceColors {
   protected PolygonAttributes polyAttrbutes = new PolygonAttributes();
 
   public MyCylinder(float radius, float height) {
-    this(20, radius, radius, height, null);
+    this(50, radius, radius, height, null);
   }
 
   public MyCylinder(float radius, float height, Appearance appearance) {
-    this(20, radius, radius, height, appearance);
+    this(50, radius, radius, height, appearance);
   }
 
   public MyCylinder(float topRadius, float bottomRadius, float height, Appearance appearance) {
-    this(20, topRadius, bottomRadius, height, appearance);
+    this(50, topRadius, bottomRadius, height, appearance);
   }
 
   public MyCylinder(int steps, float topRadius, float bottomRadius, float height, Appearance appearance) {

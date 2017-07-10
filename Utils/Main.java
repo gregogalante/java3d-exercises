@@ -20,9 +20,6 @@ import com.sun.j3d.utils.behaviors.keyboard.KeyNavigatorBehavior;
 import com.sun.j3d.utils.image.TextureLoader;
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 
-// import ColorCube as default tg child
-import com.sun.j3d.utils.geometry.ColorCube;
-
 class Main implements InterfaceTextures, InterfaceColors {
 
   private BoundingSphere defaultBound = new BoundingSphere(new Point3d(), 10.0d);
@@ -36,7 +33,7 @@ class Main implements InterfaceTextures, InterfaceColors {
     BranchGroup branchGroup = createBranchGroup();
     
     // translate user position
-    // translateLookAt(universe);
+    translateLookAt(universe);
 
     // add key movements to branchGroup
     addKeyMovementsToBranchGroup(universe, branchGroup);
@@ -116,6 +113,7 @@ class Main implements InterfaceTextures, InterfaceColors {
     branchGroup.addChild(keyNavBeh);
   }
 
+  // This function adds movements of a specific transformgroup of the branchgroup managed with mouse.
   private void addMouseMovementsToBransformGroup(TransformGroup transformGroup, BranchGroup branchGroup) {
 		// permit movements
 		transformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
@@ -184,7 +182,7 @@ class Main implements InterfaceTextures, InterfaceColors {
   // This function sets shared settings to light.
   private void addSharedSettingsToLight(Light light) {
     // set color light
-    // light.setColor();
+    // light.setColor(COLOR_WHITE);
     // enable light
     light.setEnable(true);
   }

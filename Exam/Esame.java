@@ -63,7 +63,9 @@ class Esame implements InterfaceTextures, InterfaceColors {
     TransformGroup tg = new TransformGroup();
     tg.addChild(new MyGroup(0.3f));
     // rotate tg with mouse
-    addMouseMovementsToBransformGroup(tg, bg);
+    // addMouseMovementsToTransformGroup(tg, bg);
+    // move with keyboard
+    // addKeyMovementsToTransformGroup(tg, bg);
     // add tg to bg
     bg.addChild(tg);
     // return bg
@@ -102,8 +104,6 @@ class Esame implements InterfaceTextures, InterfaceColors {
   private void addKeyMovementsToBranchGroup(SimpleUniverse universe, BranchGroup branchGroup) {
     // find view platform transformgroup
     TransformGroup viewTg = universe.getViewingPlatform().getViewPlatformTransform();
-    // create viewTg transformation
-    Transform3D viewTransform = new Transform3D();
     // create behaviour to navigate with keys
     KeyNavigatorBehavior keyNavBeh = new KeyNavigatorBehavior(viewTg);
     // create bound for key navigator
@@ -113,8 +113,24 @@ class Esame implements InterfaceTextures, InterfaceColors {
     branchGroup.addChild(keyNavBeh);
   }
 
-  // This function adds movements of a specific transformgroup of the branchgroup managed with mouse.
-  private void addMouseMovementsToBransformGroup(TransformGroup transformGroup, BranchGroup branchGroup) {
+  // Transformgroup movements:
+  // *******************************************************************************************
+
+  // This function adds the possibility to user to move the viewer with keys inside the world.
+  private void addKeyMovementsToTransformGroup(TransformGroup transformGroup, BranchGroup branchGroup) {
+    // create transform transformation
+    Transform3D transform = new Transform3D();
+    // create behaviour to navigate with keys
+    KeyNavigatorBehavior keyNavBeh = new KeyNavigatorBehavior(transformGroup);
+    // create bound for key navigator
+    keyNavBeh.setSchedulingBounds(this.defaultBound);
+
+    // add behaviour to branchgroup
+    branchGroup.addChild(keyNavBeh);
+  }
+
+  // This function adds movements of a specific transformgroup of the transformgroup managed with mouse.
+  private void addMouseMovementsToTransformGroup(TransformGroup transformGroup, BranchGroup branchGroup) {
 		// permit movements
 		transformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
 		transformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);

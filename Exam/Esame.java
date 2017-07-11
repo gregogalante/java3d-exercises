@@ -45,10 +45,10 @@ class Esame implements InterfaceTextures, InterfaceColors {
     addDirectionalLight(branchGroup);
 
     // add spot light to branchGroup
-    addSpotLight(branchGroup);
+    // addSpotLight(branchGroup);
 
     // add a background image to the branchGroup
-    // addBackground(branchGroup, TEXTURE_STARS);
+    addBackground(branchGroup, TEXTURE_ALIEN_BEDROOM);
 
     // add branchgroup to universe
     branchGroup.compile();
@@ -61,9 +61,13 @@ class Esame implements InterfaceTextures, InterfaceColors {
     BranchGroup bg = new BranchGroup();
     // create main tg
     TransformGroup tg = new TransformGroup();
-    tg.addChild(new MyGroup(0.3f));
+    tg.addChild(new PearMac(1.0f, this.defaultBound));
+    // translate tg
+    Transform3D translate = new Transform3D();
+    translate.setTranslation(new Vector3d(0.0f, -1.0f, 0.0f));
+    tg.setTransform(translate);
     // rotate tg with mouse
-    // addMouseMovementsToTransformGroup(tg, bg);
+    addMouseMovementsToTransformGroup(tg, bg);
     // move with keyboard
     // addKeyMovementsToTransformGroup(tg, bg);
     // add tg to bg
@@ -77,7 +81,7 @@ class Esame implements InterfaceTextures, InterfaceColors {
 
   // This function translates the user position on the world with default values.
   private void translateLookAt(SimpleUniverse universe) {
-    translateLookAt(universe, 0.0f, 0.0f, 4.0f, 0.0f, 0.0f, 0.0f);
+    translateLookAt(universe, 0.0f, 0.0f, 6.0f, 0.0f, 0.0f, 0.0f);
   }
 
   // This function translates the user position on the world.
@@ -198,7 +202,7 @@ class Esame implements InterfaceTextures, InterfaceColors {
   // This function sets shared settings to light.
   private void addSharedSettingsToLight(Light light) {
     // set color light
-    // light.setColor(COLOR_WHITE);
+    light.setColor(COLOR_WHITE);
     // enable light
     light.setEnable(true);
   }

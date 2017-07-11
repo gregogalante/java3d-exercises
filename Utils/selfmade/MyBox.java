@@ -5,6 +5,7 @@ import javax.media.j3d.PolygonAttributes;
 import javax.media.j3d.TriangleStripArray;
 import javax.media.j3d.GeometryArray;
 import javax.media.j3d.ColoringAttributes;
+import javax.media.j3d.TexCoordGeneration;
 
 import com.sun.j3d.utils.geometry.NormalGenerator;
 import com.sun.j3d.utils.geometry.GeometryInfo;
@@ -55,6 +56,12 @@ public class MyBox extends Shape3D implements InterfaceColors {
     NormalGenerator normgen = new NormalGenerator();
     normgen.generateNormals(gInfo);
     setGeometry(gInfo.getGeometryArray());
+    // initialize and add text coordinates generator
+    TexCoordGeneration tcg = new TexCoordGeneration(
+      TexCoordGeneration.OBJECT_LINEAR,
+      TexCoordGeneration.TEXTURE_COORDINATE_3
+    );
+	  appearance.setTexCoordGeneration(tcg);
     // manage appearance
     setAppearance(appearance);
   }

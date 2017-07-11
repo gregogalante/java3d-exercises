@@ -17,6 +17,7 @@ import javax.vecmath.Point3d;
 
 import com.sun.j3d.utils.image.TextureLoader;
 
+import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Box;
 
 class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
@@ -66,7 +67,7 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
     // transparencyAttributes.setTransparency(0.5f);
     // appearance.setTransparencyAttributes(transparencyAttributes);
     // add the texture
-    // addTextureToAppearance(appearance, TEXTURE_BORG);
+    addTextureToAppearance(appearance, TEXTURE_BORG);
     // add style
     appearance.setPolygonAttributes(new PolygonAttributes(
       PolygonAttributes.POLYGON_FILL,
@@ -93,7 +94,7 @@ class MyGroup extends Group implements InterfaceTextures, InterfaceColors {
       this.size,
       this.size,
       this.size,
-      -Box.GENERATE_NORMALS|Box.GENERATE_TEXTURE_COORDS,
+      Primitive.GENERATE_NORMALS|Primitive.GENERATE_TEXTURE_COORDS,
       this.appearance
     );
     // add object to tg

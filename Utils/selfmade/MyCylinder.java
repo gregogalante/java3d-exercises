@@ -5,6 +5,7 @@ import javax.media.j3d.Shape3D;
 import javax.media.j3d.TriangleStripArray;
 import javax.vecmath.Point3f;
 import javax.media.j3d.ColoringAttributes;
+import javax.media.j3d.TexCoordGeneration;
 
 import com.sun.j3d.utils.geometry.GeometryInfo;
 import com.sun.j3d.utils.geometry.NormalGenerator;
@@ -63,6 +64,12 @@ public class MyCylinder extends Shape3D implements InterfaceColors {
     // set geometry
     setGeometry(triangleStrip);
     setGeometry(gInfo.getGeometryArray());
+    // initialize and add text coordinates generator
+    TexCoordGeneration tcg = new TexCoordGeneration(
+      TexCoordGeneration.OBJECT_LINEAR,
+      TexCoordGeneration.TEXTURE_COORDINATE_3
+    );
+	  appearance.setTexCoordGeneration(tcg);
     // set appearance
     setAppearance(appearance);
   }

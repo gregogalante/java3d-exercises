@@ -17,7 +17,7 @@ public interface InterfaceTextures {
   public static final String TEXTURE_MARMO_PANNA = TEXTURES_PATH + "marmo_panna.jpg";
   public static final String TEXTURE_RADIO = TEXTURES_PATH + "radio.jpg";
 
-  public static final String TEXTURE_ALIEN_BEDROOM = TEXTURES_PATH + "Alien-bedroom.jpg";
+  public static final String TEXTURE_ALIEN_BEDROOM = TEXTURES_PATH + "bedroom.jpg";
   public static final String TEXTURE_IPEC = TEXTURES_PATH + "ipec.jpg";
   public static final String TEXTURE_SCHERMO_1 = TEXTURES_PATH + "2001_1.jpg";
   public static final String TEXTURE_SCHERMO_2 = TEXTURES_PATH + "2001_2.jpg";
